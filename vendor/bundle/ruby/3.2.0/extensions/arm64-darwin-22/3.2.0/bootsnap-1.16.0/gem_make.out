@@ -1,0 +1,18 @@
+current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+/Users/kentarou/.rbenv/versions/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231007-37918-izwcci sitelibdir\=./.gem.20231007-37918-izwcci clean
+
+current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231007-37918-izwcci sitelibdir\=./.gem.20231007-37918-izwcci
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231007-37918-izwcci sitelibdir\=./.gem.20231007-37918-izwcci install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20231007-37918-izwcci/bootsnap
+
+current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231007-37918-izwcci sitelibdir\=./.gem.20231007-37918-izwcci clean
