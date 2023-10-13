@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # get 'dashboard/top_page'
   # get 'dashboard/after_login'
   root "dashboard#top_page" 
