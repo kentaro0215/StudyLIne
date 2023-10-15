@@ -1,5 +1,17 @@
 <div class="navbar bg-primary text-primary-content">
   <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
-  <%= link_to "ログイン", new_user_session_path %>
   <%= link_to "sign up", new_user_registration_path %>
+  <%
+=begin%>
+ <%= link_to "Sign Up with Google", user_google_oauth2_omniauth_authorize_path, data: { "turbo-method": :post } %> 
+<%
+=end%>
+<%= link_to "Sign Up with Google", user_google_oauth2_omniauth_authorize_path, data: { "turbo-method": :post }, class: "btn btn-secondary" %>
+
+<% if user_signed_in? %>
+  <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-primary" %>
+<% else %>
+  <%= link_to 'Login', new_user_session_path, class: "btn btn-secondary" %>
+<% end %>
+
 </div>
