@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :omniauthable, omniauth_providers: %i[google_oauth2]
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :validatable
 
   has_many :authorizations, dependent: :destroy
 
@@ -38,7 +38,6 @@ class User < ApplicationRecord
       User.create(
       name: data['name'],
       email: data['email'],
-      password: Devise.friendly_token[0,20]
       )
     end  
   end
