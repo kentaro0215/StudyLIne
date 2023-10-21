@@ -7,39 +7,20 @@ class User < ApplicationRecord
   #        :recoverable, :rememberable, :validatable
 
   has_many :authorizations, dependent: :destroy
+  has_many :dashboards, dependent: :destroy
 
-  def self.from_omniauth(access_token)
-    data = extract_info(access_token)
-    user = find_by_email(data['email'])
-  
+  def self.from_omniauth(auth)
+    data = auth.info
+    user = User.where(email: data['email']).first
+
     unless user
-      user = create_user(data)
+      user = User.create(name: data['name'],email: data['email'],
+      custom_token: Devise.friendly_token[0,20])
     end
-  
-    # Save the tokens to the user's Authorization record
-    authorization = user.authorizations.find_or_initialize_by(provider: access_token.provider, uid: access_token.uid)
-    authorization.access_token = access_token.credentials.token
-    authorization.refresh_token = access_token.credentials.refresh_token # refresh_token may be nil
+    authorization = user.authorizations.find_or_create_by(provider: auth.provider, uid: auth.uid)
     authorization.save
-  
+    
     user
-  end
-
-  def self.extract_info(access_token)
-    access_token.info
-  end
-  
-  def self.find_by_email(email)
-    User.where(email: email).first
-  end
-  
-  def self.create_user(data)
-    transaction do
-      User.create(
-      name: data['name'],
-      email: data['email'],
-      )
-    end  
   end
 
 end
