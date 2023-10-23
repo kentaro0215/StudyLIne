@@ -35,6 +35,7 @@ class DashboardController < ApplicationController
 
   def after_login
     @dashboards = current_user.dashboards
+    @last_week_dashboards = @dashboards.past_week_date
   end
 
   private

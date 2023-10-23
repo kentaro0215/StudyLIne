@@ -8,10 +8,10 @@
 
 <script>
 var data = {
-  labels: ['Session 1', 'Session 2', 'Session 3'],  // セッション名または日付など
+  labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],  // セッション名または日付など
   datasets: [{
     label: 'Total Time (minutes)',
-    data: [45, 30, 60],  // これはRailsからのtotal_timeデータで置き換える必要があります
+    data: <%= @last_week_dashboards.flatten %>,  // これはRailsからのtotal_timeデータで置き換える必要があります
     backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
       'rgba(54, 162, 235, 0.2)',
@@ -38,4 +38,7 @@ var totalTimeChart = new Chart(ctx, {
     }
   }
 });
+</script>
+
+<script>
 </script>
