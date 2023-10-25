@@ -1,10 +1,4 @@
-<h1>Dashboard#after_login</h1>
-<p>Find me in app/views/dashboard/after_login.html.erb</p>
-
-<%= render partial: 'shared/chart' %>
-<%
-=begin%>
- <!-- HTMLの<head>セクションに以下のコードを追加 -->
+<!-- HTMLの<head>セクションに以下のコードを追加 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- チャートを表示するためのHTML要素 -->
 <canvas id="totalTimeChart" width="400" height="200"></canvas>
@@ -41,6 +35,4 @@ var totalTimeChart = new Chart(ctx, {
     }
   }
 });
-</script> 
-<%
-=end%>
+</script>
