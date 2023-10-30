@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!, only: [:start, :finish]
-
+  protect_from_forgery except: [:start, :finish] 
 
   def top_page
   end
@@ -44,6 +44,10 @@ class DashboardController < ApplicationController
     token = request.headers['Authorization'].split('Bearer ').last
     user = User.find_by(custom_token: token)
     head :unauthorized unless user
+  end
+
+  def current_user
+    @current_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
   end
 
   def dashboard_params
