@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
 
   def start
     # 現在のユーザーに対して未完成のDashboardセッションを確認
-    ongoing_session = current_user.dashboards.find_by(finish_time: nil)
+    ongoing_session = token_user.dashboards.find_by(finish_time: nil)
     
     # 未完成のセッションが見つかった場合はエラーを返す
     if ongoing_session
@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
     end
     
     # 新しいDashboardセッションを作成
-    @dashboard = current_user.dashboards.new(start_time: params[:start_time])
+    @dashboard = token_user.dashboards.new(start_time: params[:start_time])
     if @dashboard.save
       render json: { status: 'success', data: @dashboard }, status: :ok
     else
@@ -25,8 +25,9 @@ class DashboardController < ApplicationController
   end
   
   def finish
-    @dashboard = current_user.dashboards.find_by(id: params[:id])
+    @dashboard = token_user.dashboards.find_by(finish_time: nil)
     if @dashboard&.update(finish_time: params[:finish_time])
+      @dashboard.calculate_total_time
       render json: { status: 'success', data: @dashboard }, status: :ok
     else
       render json: { status: 'error', message: @dashboard ? @dashboard.errors.full_messages : 'Dashboard not found' }, status: :unprocessable_entity
@@ -46,8 +47,12 @@ class DashboardController < ApplicationController
     head :unauthorized unless user
   end
 
-  def current_user
-    @current_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
+  # def current_user
+  #   @current_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
+  # end
+
+  def token_user
+    @token_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
   end
 
   def dashboard_params
