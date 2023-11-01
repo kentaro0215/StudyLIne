@@ -1,7 +1,31 @@
 <h1>Dashboard#after_login</h1>
 <p>Find me in app/views/dashboard/after_login.html.erb</p>
+<div class="graph-container"> 
+  <button id="toggle-button">Toggle Graphs</button>
+  <div id="chart-container" style="display: block;">
+    <%= render partial: 'shared/chart' %>
+  </div>
+  <div id="line-container" style="display: none;">
+    <%= render partial: 'shared/line' %>
+  </div>
+ 
+</div>
 
-<%= render partial: 'shared/chart' %>
+<script type="text/javascript">
+  document.getElementById('toggle-button').addEventListener('click', function() {
+    var chartContainer = document.getElementById('chart-container');
+    var lineContainer = document.getElementById('line-container');
+
+    if (chartContainer.style.display === 'block') {
+      chartContainer.style.display = 'none';
+      lineContainer.style.display = 'block';
+    } else {
+      chartContainer.style.display = 'block';
+      lineContainer.style.display = 'none';
+    }
+  });
+</script>
+
 <%
 =begin%>
  <!-- HTMLの<head>セクションに以下のコードを追加 -->
