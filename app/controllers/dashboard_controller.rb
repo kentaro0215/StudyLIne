@@ -37,6 +37,13 @@ class DashboardController < ApplicationController
   def after_login
     @dashboards = current_user.dashboards
     @last_week_dashboards = @dashboards.past_week_date
+    year = params[:year].present? ? params[:year].to_i : Time.now.year
+    month = params[:month].present? ? params[:month].to_i : Time.now.month
+    @month_data = Dashboard.past_month_data(year, month)
+    respond_to do |format|
+      format.html  # after_login.html.erbをレンダリング
+      format.json { render json: @month_data }  # JSONレスポンスを返す
+    end
   end
 
   private

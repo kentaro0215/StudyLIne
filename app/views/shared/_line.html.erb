@@ -1,34 +1,75 @@
+<select id="month-selector">
+  <option value="1">1月</option>
+  <option value="2">2月</option>
+  <option value="3">3月</option>
+  <option value="4">4月</option>
+  <option value="5">5月</option>
+  <option value="6">6月</option>
+  <option value="7">7月</option>
+  <option value="8">8月</option>
+  <option value="9">9月</option>
+  <option value="10">10月</option>
+  <option value="11">11月</option>
+  <option value="12">12月</option>
+</select>
+
 <canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', (event) => {
-    // 30日間の日付データを生成
-    const labels = Array.from({ length: 30 }, (_, i) => 
-      new Date(Date.now() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-    ).reverse();
+    const monthSelector = document.getElementById('month-selector');
+    const ctx = document.getElementById('myChart').getContext('2d');
+    let myChart;
 
-    // ランダムなデータを生成
-    const data = Array.from({ length: 30 }, () => Math.floor(Math.random() * 100));
+    async function updateChart(month) {
+      const now = new Date();
+      const year = now.getFullYear();
 
-    const ctx2 = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx2, {
-      type: 'line',
-      data: {
-          labels: labels,
-          datasets: [{
-              label: 'Random Data',
-              data: data,
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {  // ここを yAxes から y に変更
-                  beginAtZero: true
-              }
-          }
+      // バックエンドから選択した月のデータを取得
+      const response = await axios.get(`/dashboard/after_login/${year}/${month}`);
+      const data = response.data;
+
+      const daysInMonth = new Date(year, month, 0).getDate();
+      const labels = Array.from({ length: daysInMonth }, (_, i) =>
+        new Date(year, month - 1, i + 1).toISOString().split('T')[0]
+      );
+
+      if (myChart) {
+        // 既存のグラフを削除
+        myChart.destroy();
       }
+
+      // 新しいグラフを作成
+      myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total Time',
+                data: data,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+      });
+    }
+
+    monthSelector.addEventListener('change', function() {
+      const selectedMonth = monthSelector.value;
+      updateChart(selectedMonth);
     });
+
+    // 初期値として現在の月のグラフを表示
+    monthSelector.value = new Date().getMonth() + 1;
+    monthSelector.dispatchEvent(new Event('change'));
   });
 </script>
