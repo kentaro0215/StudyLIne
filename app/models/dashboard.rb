@@ -16,6 +16,13 @@ class Dashboard < ApplicationRecord
     this_week_dashboards
   end
 
+  # def self.daily_totals_for_month(month = Time.current.month)
+
+  #   where("EXTRACT(MONTH FROM created_at) = ?", month)
+  #     .group("DATE(created_at)")
+  #     .sum(:total_time)
+  # end
+
   def self.past_month_data(year = Time.now.year, month = Time.now.month)
     # 指定された月の日数を取得
     days_in_month = Date.new(year, month, 1).next_month.prev_day.day
@@ -33,23 +40,10 @@ class Dashboard < ApplicationRecord
     # 各日のデータを集計
     dashboards.each do |dashboard|
       day = dashboard.created_at.day
-      month_data[day - 1] += dashboard.total_time
+      month_data[day - 1] += dashboard.total_time || 0  
     end
 
     month_data
   end
-  # def self.past_month_data(year, month)
-  #   days_in_month = Date.new(year, month, -1).day
-  #   month_data = Array.new(days_in_month, 0)  # 初期データは全て0
-
-  #   # 対象月のデータを取得
-  #   dashboards = self.where(created_at: Date.new(year, month, 1)..Date.new(year, month, days_in_month))
-  #   dashboards.each do |dashboard|
-  #     day = dashboard.created_at.day
-  #     month_data[day - 1] += dashboard.total_time
-  #   end
-  #   month_data
-  # end
-
-
+  
 end

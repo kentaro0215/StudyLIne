@@ -40,6 +40,7 @@ class DashboardController < ApplicationController
     year = params[:year].present? ? params[:year].to_i : Time.now.year
     month = params[:month].present? ? params[:month].to_i : Time.now.month
     @month_data = Dashboard.past_month_data(year, month)
+    @month_data = Hash[(1..@month_data.length).zip @month_data]
     respond_to do |format|
       format.html  # after_login.html.erbをレンダリング
       format.json { render json: @month_data }  # JSONレスポンスを返す
