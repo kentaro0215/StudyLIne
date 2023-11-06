@@ -1,0 +1,129 @@
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<%= @month_data.inspect %>
+
+<select id="month-selector">
+  <option value="1">1月</option>
+  <option value="2">2月</option>
+  <option value="3">3月</option>
+  <option value="4">4月</option>
+  <option value="5">5月</option>
+  <option value="6">6月</option>
+  <option value="7">7月</option>
+  <option value="8">8月</option>
+  <option value="9">9月</option>
+  <option value="10">10月</option>
+  <option value="11">11月</option>
+  <option value="12">12月</option>
+</select>
+    <canvas id="myChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const monthSelector = document.getElementById('month-selector');
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let myChart;
+    
+        async function updateChart(month) {
+          const now = new Date();
+          const year = now.getFullYear();
+    
+          // バックエンドから選択した月のデータを取得
+          const response = await axios.get(`/dashboard/after_login/${year}/${month}`, {
+    headers: {
+        Accept: 'application/json'
+    }
+});
+
+          const data = response.data;
+          // console.log(data);
+
+          const values = Object.values(response.data);
+          console.log(values);
+    
+          const daysInMonth = new Date(year, month, 0).getDate();
+          const labels = Array.from({ length: daysInMonth }, (_, i) =>
+            new Date(year, month -1, i + 2).toISOString().split('T')[0]
+          );
+    
+          if (myChart) {
+            // 既存のグラフを削除
+            myChart.destroy();
+          }
+    
+          // 新しいグラフを作成
+          myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Time',
+                    data: values,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+          });
+        }
+    
+        monthSelector.addEventListener('change', function() {
+          const selectedMonth = monthSelector.value;
+          updateChart(selectedMonth);
+        });
+    
+        // 初期値として現在の月のグラフを表示
+        monthSelector.value = new Date().getMonth() + 1;
+        monthSelector.dispatchEvent(new Event('change'));
+      });
+    </script> 
+<%
+=begin%>
+ 
+<canvas id="myChart"></canvas>
+
+<script type="text/javascript">
+  document.getElementById('month-selector').addEventListener('change', function() {
+    var month = this.value;
+    fetch('/dashboard/after_login?month=' + month)
+      .then(response => response.json())
+      .then(data => {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: Object.keys(data),
+            datasets: [{
+              label: 'Total Time',
+              data: Object.values(data),
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                type: 'time',
+                time: {
+                  unit: 'day'
+                }
+              },
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      });
+  });
+</script> 
+<%
+=end%>
+ 

@@ -1,0 +1,38 @@
+<!-- HTMLの<head>セクションに以下のコードを追加 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- チャートを表示するためのHTML要素 -->
+<canvas id="totalTimeChart" width="400" height="200"></canvas>
+
+<script>
+var chartData = {
+  labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],  // セッション名または日付など
+  datasets: [{
+    label: 'Total Time (minutes)',
+    data: <%= @last_week_dashboards.flatten %>,  // これはRailsからのtotal_timeデータで置き換える必要があります
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)'
+    ],
+    borderColor: [
+      'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)'
+    ],
+    borderWidth: 1
+  }]
+};
+
+var ctx = document.getElementById('totalTimeChart').getContext('2d');
+var totalTimeChart = new Chart(ctx, {
+  type: 'bar',  // barタイプのグラフを指定
+  data: chartData,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+</script>
