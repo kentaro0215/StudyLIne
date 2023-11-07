@@ -1,8 +1,3 @@
-PATH
-  remote: ../study_line
-  specs:
-    study_line (0.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -272,7 +267,6 @@ DEPENDENCIES
   rails (~> 7.0.8)
   sprockets-rails
   stimulus-rails
-  study_line!
   turbo-rails
   tzinfo-data
   web-console
