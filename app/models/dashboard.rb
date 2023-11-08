@@ -47,5 +47,12 @@ class Dashboard < ApplicationRecord
 
     month_data
   end
+
+  def assign_tags_by_name(tag_name)
+    tag_name.each do |name|
+      tag = Tag.find_or_create_by_name(name)
+      self.tags << tag unless self.tags.include?(tag)
+    end
+  end
   
 end

@@ -1,4 +1,11 @@
-<h1>Dashboard#after_login</h1>
+<h1>グラフ2種類</h1>
+<p>Tags:</p>
+<ul>
+  <% @tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
 <div class="graph-container"> 
   <button id="toggle-button">Toggle Graphs</button>
   <div id="chart-container" style="display: block;">

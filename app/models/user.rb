@@ -23,4 +23,8 @@ class User < ApplicationRecord
     user
   end
 
+  def all_tags
+    dashboards.joins(:tags).select('tags.*').distinct
+  end
+
 end

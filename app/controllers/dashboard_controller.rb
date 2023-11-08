@@ -17,6 +17,7 @@ class DashboardController < ApplicationController
     
     # 新しいDashboardセッションを作成
     @dashboard = token_user.dashboards.new(start_time: params[:start_time])
+    @dashboard.assign_tags_by_name(params[:tags]) if params[:tags].present?
     if @dashboard.save
       render json: { status: 'success', data: @dashboard }, status: :ok
     else
@@ -36,6 +37,7 @@ class DashboardController < ApplicationController
 
   def after_login
     @dashboards = current_user.dashboards
+    @tags = current_user.all_tags
     @last_week_dashboards = @dashboards.past_week_date
     year = params[:year].present? ? params[:year].to_i : Time.now.year
     month = params[:month].present? ? params[:month].to_i : Time.now.month
@@ -64,6 +66,6 @@ class DashboardController < ApplicationController
   end
 
   def dashboard_params
-    params.require(:dashboard).permit(:start_time, :finish_time)
+    params.require(:dashboard).permit(:start_time, :finish_time, :tags [])
   end
 end
