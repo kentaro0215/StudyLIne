@@ -27,4 +27,9 @@ class User < ApplicationRecord
     dashboards.joins(:tags).select('tags.*').distinct
   end
 
+  #　タグごとの勉強時間を計算
+  def tag_total_time
+    dashboards.joins(:tags).group('tags.name').sum('dashboards.total_time')
+  end
+
 end

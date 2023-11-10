@@ -1,5 +1,6 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+
 <select id="month-selector">
   <option value="1">1月</option>
   <option value="2">2月</option>
@@ -14,6 +15,7 @@
   <option value="11">11月</option>
   <option value="12">12月</option>
 </select>
+<canvas id="myChart" width="400" height="200"></canvas>
     <canvas id="myChart"></canvas>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
@@ -83,46 +85,3 @@
         monthSelector.dispatchEvent(new Event('change'));
       });
     </script> 
-<%
-=begin%>
- 
-<canvas id="myChart"></canvas>
-
-<script type="text/javascript">
-  document.getElementById('month-selector').addEventListener('change', function() {
-    var month = this.value;
-    fetch('/dashboard/after_login?month=' + month)
-      .then(response => response.json())
-      .then(data => {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: Object.keys(data),
-            datasets: [{
-              label: 'Total Time',
-              data: Object.values(data),
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              x: {
-                type: 'time',
-                time: {
-                  unit: 'day'
-                }
-              },
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-      });
-  });
-</script> 
-<%
-=end%>
- 

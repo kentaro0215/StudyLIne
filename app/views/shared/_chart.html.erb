@@ -1,4 +1,113 @@
-<!-- HTMLの<head>セクションに以下のコードを追加 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="studyTimeChart" width="400" height="200"></canvas>
+
+<script>
+// データの準備
+const rawData = <%= raw @last_week_dashboards_with_tags.to_json %>;
+const labels = rawData.map(entry => entry.date);
+const datasets = [];
+
+// 色のセットを定義
+const colors = [
+  'rgba(255, 99, 132, 0.2)', // 赤
+  'rgba(54, 162, 235, 0.2)', // 青
+  'rgba(255, 206, 86, 0.2)', // 黄色
+  // 他の色を追加で定義
+];
+const borderColors = [
+  'rgba(255, 99, 132, 1)', // 赤
+  'rgba(54, 162, 235, 1)', // 青
+  'rgba(255, 206, 86, 1)', // 黄色
+  // 他の色を追加で定義
+];
+
+// タグごとのデータセットを生成
+let colorIndex = 0;
+rawData.forEach(dayData => {
+  Object.keys(dayData.data).forEach(tag => {
+    let dataset = datasets.find(d => d.label === tag);
+    if (!dataset) {
+      dataset = {
+        label: tag,
+        data: [],
+        backgroundColor: colors[colorIndex % colors.length], // ユニークな背景色を設定
+        borderColor: borderColors[colorIndex % borderColors.length], // ユニークな境界色を設定
+        borderWidth: 1
+      };
+      datasets.push(dataset);
+      colorIndex++; // 次の色へ
+    }
+    dataset.data.push(dayData.data[tag] || 0); // タグのデータがない場合は0を追加
+  });
+});
+
+// データセットのデータ配列の長さを揃える
+datasets.forEach(dataset => {
+  while (dataset.data.length < labels.length) {
+    dataset.data.push(0); // データが不足している場合は0を追加
+  }
+});
+
+// Chart.jsでグラフを生成
+var ctx = document.getElementById('studyTimeChart').getContext('2d');
+var studyTimeChart = new Chart(ctx, {
+  type: 'bar', // または 'line' 折れ線グラフの場合
+  data: {
+    labels: labels,
+    datasets: datasets
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+</script>
+
+<%
+=begin%>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="totalTimeAndTagsChart" width="400" height="200"></canvas>
+
+<script>
+// グラフデータの設定
+var chartData = {
+  labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],  // 日付ラベル
+  datasets: [
+    {
+      label: 'Total Time (minutes)',
+      data: <%= @last_week_dashboards_with_tags.flatten %>, // 最後の7日間のtotal_timeデータ
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      borderWidth: 1
+    },
+  ]
+};
+
+var ctx = document.getElementById('totalTimeAndTagsChart').getContext('2d');
+var totalTimeAndTagsChart = new Chart(ctx, {
+  type: 'bar',  // 棒グラフを指定
+  data: chartData,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+</script> 
+<%
+=end%>
+
+
+
+
+<%
+=begin%>
+ <!-- HTMLの<head>セクションに以下のコードを追加 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- チャートを表示するためのHTML要素 -->
 <canvas id="totalTimeChart" width="400" height="200"></canvas>
@@ -20,7 +129,17 @@ var chartData = {
       'rgba(255, 206, 86, 1)'
     ],
     borderWidth: 1
-  }]
+  }],
+    // 以下、タグごとのデータセットを追加
+    <% @tags_total_time.each do |tag, time| %>
+    {
+      label: '<%= tag %>',
+      data: Array(7).fill(<%= time %>), // 各タグの時間データ。ここでは、最近7日間で同じ時間を使っていると仮定しています。
+      backgroundColor: '透明度を変えたランダムな色',
+      borderColor: 'ランダムな色',
+      borderWidth: 1
+    },
+    <% end %>
 };
 
 var ctx = document.getElementById('totalTimeChart').getContext('2d');
@@ -35,4 +154,6 @@ var totalTimeChart = new Chart(ctx, {
     }
   }
 });
-</script>
+</script> 
+<%
+=end%>
