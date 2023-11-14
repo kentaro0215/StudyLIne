@@ -37,12 +37,7 @@ class DashboardController < ApplicationController
 
   def after_login
     @dashboards = current_user.dashboards
-    #　タグごとの勉強時間を計算
-    @tags = current_user.all_tags
-    # タグごとの勉強時間を計算
-    @tags_total_time = current_user.tag_total_time
-    @last_week_dashboards = @dashboards.past_week_date
-    @last_week_dashboards_with_tags = @dashboards.past_week_date_with_tags
+    @last_week_dashboards_with_tags = @dashboards.data_for_week_containing(Date.today)
     year = params[:year].present? ? params[:year].to_i : Time.now.year
     month = params[:month].present? ? params[:month].to_i : Time.now.month
     @month_data = Dashboard.past_month_data(year, month)
@@ -51,6 +46,15 @@ class DashboardController < ApplicationController
       format.html  # after_login.html.erbをレンダリング
       format.json { render json: @month_data }  # JSONレスポンスを返す
     end
+  end
+
+  def week_data
+    start_date = params[:start_date].to_date
+  
+    # Dashboardモデルのメソッドを使用して、指定された週のデータを取得
+    week_data_with_tags = Dashboard.data_for_week_containing(start_date)
+  
+    render json: week_data_with_tags
   end
 
   private

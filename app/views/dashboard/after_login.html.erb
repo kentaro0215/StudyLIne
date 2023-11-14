@@ -1,12 +1,14 @@
 <h1>グラフ2種類</h1>
-
+<% @last_week_dashboards_with_tags.each do |day| %>
+  <%= day %>
+<% end %>
 <div class="graph-container"> 
   <button id="toggle-button">Toggle Graphs</button>
   <div id="chart-container" style="display: block;">
-    <%= render partial: 'shared/line' %>
+    <%= render partial: 'shared/chart' %>
   </div>
   <div id="line-container" style="display: none;">
-    <%= render partial: 'shared/chart' %>
+    <%= render partial: 'shared/line' %>
   </div>
 </div>
 

@@ -32,10 +32,10 @@
     
           // バックエンドから選択した月のデータを取得
           const response = await axios.get(`/dashboard/after_login/${year}/${month}`, {
-    headers: {
-        Accept: 'application/json'
-    }
-});
+                  headers: {
+                      Accept: 'application/json'
+                  }
+              });
 
           const data = response.data;
           // console.log(data);
@@ -44,9 +44,8 @@
           console.log(values);
     
           const daysInMonth = new Date(year, month, 0).getDate();
-          const labels = Array.from({ length: daysInMonth }, (_, i) =>
-            new Date(year, month -1, i + 2).toISOString().split('T')[0]
-          );
+          const labels = Array.from({ length: daysInMonth }, (_, i) => i + 1); // 日付のみの配列を生成
+
     
           if (myChart) {
             // 既存のグラフを削除
@@ -55,20 +54,26 @@
     
           // 新しいグラフを作成
           myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: labels,
                 datasets: [{
                     label: 'Total Time',
                     data: values,
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                          stepSize:60,
+                          callback: function(value, index, values){
+                            return  value / 60 +  '時間' 
+                          }
+                        }
                     }
                 }
             }

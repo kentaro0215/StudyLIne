@@ -41,35 +41,44 @@ class Dashboard < ApplicationRecord
     month_data
   end
 
-  #　タグごとの勉強時間を計算
-  # def tag_total_time
-  #   dashboards.joins(:tags).group('tags.name').sum('dashboards.total_time')
-  # end
-
   def assign_tags_by_name(tag_name)
     tag_name.each do |name|
       tag = Tag.find_or_create_by_name(name)
       self.tags << tag unless self.tags.include?(tag)
     end
   end
-
-  def self.past_week_date_with_tags
-    # 一週間分のデータを格納する配列を初期化
+  
+  def self.data_for_week_containing(date)
+    # 与えられた日付が含まれる週の月曜日を見つける
+    monday = date.at_beginning_of_week
     week_data_with_tags = []
-  
-    # 今日から過去6日間にわたってデータを集計
-    6.downto(0) do |n|
-      # その日のダッシュボードを取得
-      daily_dashboards = self.where(created_at: n.day.ago.all_day)
-  
-      # タグごとに集計
+    (0..6).each do |n|
+      day = monday + n.days
+      daily_dashboards = self.where(created_at: day.all_day)
       daily_data = daily_dashboards.joins(:tags).group('tags.name').sum(:total_time)
-      # 日付とともにハッシュに追加
-      week_data_with_tags << { date: n.day.ago.to_date, data: daily_data }
+      week_data_with_tags << { date: day, data: daily_data }
     end
   
     week_data_with_tags
   end
+
+  # def self.past_week_date_with_tags
+  #   # 一週間分のデータを格納する配列を初期化
+  #   week_data_with_tags = []
+  
+  #   # 今日から過去6日間にわたってデータを集計
+  #   6.downto(0) do |n|
+  #     # その日のダッシュボードを取得
+  #     daily_dashboards = self.where(created_at: n.day.ago.all_day)
+  
+  #     # タグごとに集計
+  #     daily_data = daily_dashboards.joins(:tags).group('tags.name').sum(:total_time)
+  #     # 日付とともにハッシュに追加
+  #     week_data_with_tags << { date: n.day.ago.to_date, data: daily_data }
+  #   end
+  
+  #   week_data_with_tags
+  # end
   
   
 end
