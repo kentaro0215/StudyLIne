@@ -1,6 +1,8 @@
 class Dashboard < ApplicationRecord
   belongs_to :user
-
+  has_many :dashboard_tags
+  has_many :tags, through: :dashboard_tags
+  
   def calculate_total_time
     return unless start_time && finish_time
     self.total_time = ((finish_time - start_time) / 60).to_i
@@ -15,13 +17,6 @@ class Dashboard < ApplicationRecord
     end
     this_week_dashboards
   end
-
-  # def self.daily_totals_for_month(month = Time.current.month)
-
-  #   where("EXTRACT(MONTH FROM created_at) = ?", month)
-  #     .group("DATE(created_at)")
-  #     .sum(:total_time)
-  # end
 
   def self.past_month_data(year = Time.now.year, month = Time.now.month)
     # 指定された月の日数を取得
@@ -45,5 +40,45 @@ class Dashboard < ApplicationRecord
 
     month_data
   end
+
+  def assign_tags_by_name(tag_name)
+    tag_name.each do |name|
+      tag = Tag.find_or_create_by_name(name)
+      self.tags << tag unless self.tags.include?(tag)
+    end
+  end
+  
+  def self.data_for_week_containing(date)
+    # 与えられた日付が含まれる週の月曜日を見つける
+    monday = date.at_beginning_of_week
+    week_data_with_tags = []
+    (0..6).each do |n|
+      day = monday + n.days
+      daily_dashboards = self.where(created_at: day.all_day)
+      daily_data = daily_dashboards.joins(:tags).group('tags.name').sum(:total_time)
+      week_data_with_tags << { date: day, data: daily_data }
+    end
+  
+    week_data_with_tags
+  end
+
+  # def self.past_week_date_with_tags
+  #   # 一週間分のデータを格納する配列を初期化
+  #   week_data_with_tags = []
+  
+  #   # 今日から過去6日間にわたってデータを集計
+  #   6.downto(0) do |n|
+  #     # その日のダッシュボードを取得
+  #     daily_dashboards = self.where(created_at: n.day.ago.all_day)
+  
+  #     # タグごとに集計
+  #     daily_data = daily_dashboards.joins(:tags).group('tags.name').sum(:total_time)
+  #     # 日付とともにハッシュに追加
+  #     week_data_with_tags << { date: n.day.ago.to_date, data: daily_data }
+  #   end
+  
+  #   week_data_with_tags
+  # end
+  
   
 end

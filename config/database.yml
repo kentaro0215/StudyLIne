@@ -24,6 +24,10 @@ default: &default
 development:
   <<: *default
   database: StudyLine_development
+  username: kentarou
+  # パスワードは環境変数から取得する
+  password: <%= ENV['STUDYLINE_DATABASE_PASSWORD'] %>
+  host: localhost
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

@@ -1,38 +1,161 @@
-<!-- HTMLの<head>セクションに以下のコードを追加 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- チャートを表示するためのHTML要素 -->
-<canvas id="totalTimeChart" width="400" height="200"></canvas>
+<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+  <button id="prev-week">先週</button>
+  <div id="week-range" style="margin: 0 20px;"></div>
+  <button id="next-week">次週</button>
+</div>
+
+<canvas id="studyTimeChart" width="400" height="200"></canvas>
 
 <script>
-var chartData = {
-  labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],  // セッション名または日付など
-  datasets: [{
-    label: 'Total Time (minutes)',
-    data: <%= @last_week_dashboards.flatten %>,  // これはRailsからのtotal_timeデータで置き換える必要があります
-    backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(255, 206, 86, 0.2)'
-    ],
-    borderColor: [
-      'rgba(255, 99, 132, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)'
-    ],
-    borderWidth: 1
-  }]
-};
+  const labels =  ['月', '火', '水', '木', '金', '土', '日'];
+  // 現在表示している週の開始日（月曜日）を追跡する変数
+  let currentWeekStart = new Date();
 
-var ctx = document.getElementById('totalTimeChart').getContext('2d');
-var totalTimeChart = new Chart(ctx, {
-  type: 'bar',  // barタイプのグラフを指定
-  data: chartData,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
+  let studyTimeChart;
+  document.getElementById('prev-week').addEventListener('click', () => changeWeek(-1));
+  document.getElementById('next-week').addEventListener('click', () => changeWeek(1));
+
+function updateWeekRangeDisplay() {
+  // currentWeekStartを1日前に設定
+  const startDate = new Date(currentWeekStart);
+  startDate.setDate(startDate.getDate() - 1);
+
+  // endDateを1日前（元のコードから5日後）に設定
+  const endDate = new Date(currentWeekStart);
+  endDate.setDate(currentWeekStart.getDate() + 5);
+
+  const formatOptions = { month: 'numeric', day: 'numeric' };
+  const startFormatted = startDate.toLocaleDateString('ja-JP', formatOptions);
+  const endFormatted = endDate.toLocaleDateString('ja-JP', formatOptions);
+
+  document.getElementById('week-range').textContent = `${startFormatted} ~ ${endFormatted}`;
+}
+
+  async function changeWeek(offset) {
+    currentWeekStart.setDate(currentWeekStart.getDate() + offset * 7);
+    const formattedDate = currentWeekStart.toISOString().split('T')[0];
+    const response = await fetch(`/dashboard/week_data?start_date=${formattedDate}`);
+    const newRawData = await response.json();
+    updateChart(newRawData);
+    updateWeekRangeDisplay();
   }
+
+  async function updateChart(rawData) {
+    console.log(rawData)
+
+    const datasets = [];
+    
+    // 色のセットを定義
+    const colors = [
+      'rgba(255, 99, 132, 0.2)', // 赤
+      'rgba(54, 162, 235, 0.2)', // 青
+      'rgba(255, 206, 86, 0.2)', // 黄色
+      'rgba(75, 192, 192, 0.2)', // シアン
+      'rgba(153, 102, 255, 0.2)', // 紫
+      'rgba(255, 159, 64, 0.2)', // オレンジ
+      'rgba(199, 199, 199, 0.2)', // グレー
+      'rgba(233, 30, 99, 0.2)', // 桃色
+      'rgba(33, 150, 243, 0.2)', // ブルー
+      'rgba(76, 175, 80, 0.2)' // グリーン
+    ];
+    const borderColors = [
+      'rgba(255, 99, 132, 1)', // 赤
+      'rgba(54, 162, 235, 1)', // 青
+      'rgba(255, 206, 86, 1)', // 黄色
+      'rgba(75, 192, 192, 0.2)', // シアン
+      'rgba(153, 102, 255, 0.2)', // 紫
+      'rgba(255, 159, 64, 0.2)', // オレンジ
+      'rgba(199, 199, 199, 0.2)', // グレー
+      'rgba(233, 30, 99, 0.2)', // 桃色
+      'rgba(33, 150, 243, 0.2)', // ブルー
+      'rgba(76, 175, 80, 0.2)' // グリーン
+    ];
+    
+    // タグごとのデータセットを生成
+    let colorIndex = 0;
+
+  if (rawData.length === 0 || rawData.every(dayData => Object.keys(dayData.data).length === 0)) {
+    datasets.push({
+      label: 'No Data',
+      data: new Array(7).fill(0),
+      backgroundColor: 'rgba(200, 200, 200, 0.2)',
+      borderColor: 'rgba(200, 200, 200, 1)',
+      borderWidth: 1
+    });
+  } else {
+    rawData.forEach(dayData => {
+    // 日付をDateオブジェクトに変換
+    const dayDate = new Date(dayData.date);
+    // 日付から曜日インデックスを取得（0:日, 1:月, ..., 6:土）
+    const dayOfWeek = dayDate.getDay();
+    // 日本の曜日に合わせて調整（0:月, 1:火, ..., 6:日）
+    const adjustedDay = (dayOfWeek === 0) ? 6 : dayOfWeek - 1;
+        Object.keys(dayData.data).forEach(tag => {
+        let dataset = datasets.find(d => d.label === tag);
+        if  (!dataset) {
+          dataset = {
+            label: tag,
+            data: new Array(7).fill(0),
+            backgroundColor: colors[colorIndex % colors.length], // ユニークな背景色を設定
+            borderColor: borderColors[colorIndex % borderColors.length], // ユニークな境界色を設定
+            borderWidth: 1
+          };
+          datasets.push(dataset);
+          colorIndex++; // 次の色へ
+        }
+      // 対応する曜日にデータをセット
+      dataset.data[adjustedDay] = dayData.data[tag] || 0;
+
+      });
+    });
+  }
+    
+    // データセットのデータ配列の長さを揃える
+    datasets.forEach(dataset => {
+        while (dataset.data.length < labels.length) {
+        dataset.data.push(0); // データが不足している場合は0を追加
+      }
+    });
+
+    if (studyTimeChart) {
+      studyTimeChart.destroy();
+    }
+
+    
+    // Chart.jsでグラフを生成
+    var ctx = document.getElementById('studyTimeChart').getContext('2d');
+    studyTimeChart = new Chart(ctx, {
+      type: 'bar', // または 'line' 折れ線グラフの場合
+        data: {
+        labels: labels,
+        datasets: datasets
+      },
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+                      stepSize:60,
+                        callback: function(value, index, values){
+                        return  value / 60 +  '時間' 
+                      }
+                    }
+          }
+        }
+      }
 });
+}
+    // 初期データを取得して表示する関数
+  async function fetchAndDisplayInitialData() {
+    const formattedDate = currentWeekStart.toISOString().split('T')[0];
+    const response = await fetch(`/dashboard/week_data?start_date=${formattedDate}`);
+    const initialData = await response.json();
+    updateChart(initialData);
+    updateWeekRangeDisplay();
+  }
+
+  // ページ読み込み時に初期データを表示
+  fetchAndDisplayInitialData();
+ // 初期表示
 </script>
