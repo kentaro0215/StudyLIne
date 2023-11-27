@@ -1,9 +1,11 @@
 <h1>グラフ2種類</h1>
-<% @last_week_dashboards_with_tags.each do |day| %>
-  <%= day %>
-<% end %>
-<div class="graph-container"> 
-  <button id="toggle-button">Toggle Graphs</button>
+
+<button class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Responsive</button>
+<div class="graph-container">
+  <label for="toggle-graphs" >
+    <span class="label-text"></span>
+    <input type="checkbox" id="toggle-graphs" class="toggle" /> <!-- `checked`属性を削除 -->
+  </label>
   <div id="chart-container" style="display: block;">
     <%= render partial: 'shared/chart' %>
   </div>
@@ -13,16 +15,31 @@
 </div>
 
 <script type="text/javascript">
-  document.getElementById('toggle-button').addEventListener('click', function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleSwitch = document.getElementById('toggle-graphs');
+
+    // `toggleSwitch.checked`の代わりに`false`を引数として渡す
+    initializeGraphDisplay(false);
+
+    toggleSwitch.addEventListener('change', function() {
+      updateGraphDisplay(this.checked);
+    });
+  });
+
+  function updateGraphDisplay(isChecked) {
     var chartContainer = document.getElementById('chart-container');
     var lineContainer = document.getElementById('line-container');
 
-    if (chartContainer.style.display === 'block') {
+    if (isChecked) {
       chartContainer.style.display = 'none';
       lineContainer.style.display = 'block';
     } else {
       chartContainer.style.display = 'block';
       lineContainer.style.display = 'none';
     }
-  });
+  }
+
+  function initializeGraphDisplay(isChecked) {
+    updateGraphDisplay(isChecked);
+  }
 </script>

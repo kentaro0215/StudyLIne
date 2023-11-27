@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post "dashboard/start", to: "dashboard#start"
   post "dashboard/finish", to: "dashboard#finish"
   get 'dashboard/week_data', to: 'dashboard#week_data'
+  post 'dashboard/edit', to: 'dashboard#edit'
 
   resources :dashboards do
     resources :tags, only: [:create, :destroy]

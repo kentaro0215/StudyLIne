@@ -57,6 +57,10 @@ class DashboardController < ApplicationController
     render json: week_data_with_tags
   end
 
+  def edit
+    
+  end
+
   private
   
   def authenticate_user!
