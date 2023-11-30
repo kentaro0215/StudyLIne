@@ -4,6 +4,33 @@ class DashboardController < ApplicationController
 
   def top_page
   end
+  
+  def show
+    selected_date = Date.parse(params[:date])
+    @dashboards_of_day = current_user.dashboards.where('DATE(start_time) = ?', selected_date)
+    # @dashboardをビューで使用して編集フォームを表示
+    @dashboard 
+  end
+
+  def edit
+    @dashboard = Dashboard.find(params[:id])
+  end
+
+  def update
+    @dashboard = current_user.dashboards.find(params[:id])
+    if @dashboard.update(dashboard_params)
+      @dashboard.calculate_total_time
+      redirect_to dashboard_after_login_path, notice: 'Dashboard was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @dashboard = current_user.dashboards.find(params[:id])
+    @dashboard.destroy
+    redirect_to dashboard_after_login_path, notice: 'Dashboard was successfully destroyed.'
+  end
 
   def start
     # 現在のユーザーに対して未完成のDashboardセッションを確認
@@ -17,6 +44,7 @@ class DashboardController < ApplicationController
     
     # 新しいDashboardセッションを作成
     @dashboard = token_user.dashboards.new(start_time: params[:start_time])
+    @dashboard.assign_tags_by_name(params[:tags]) if params[:tags].present?
     if @dashboard.save
       render json: { status: 'success', data: @dashboard }, status: :ok
     else
@@ -36,7 +64,7 @@ class DashboardController < ApplicationController
 
   def after_login
     @dashboards = current_user.dashboards
-    @last_week_dashboards = @dashboards.past_week_date
+    @last_week_dashboards_with_tags = @dashboards.data_for_week_containing(Date.today)
     year = params[:year].present? ? params[:year].to_i : Time.now.year
     month = params[:month].present? ? params[:month].to_i : Time.now.month
     @month_data = Dashboard.past_month_data(year, month)
@@ -46,6 +74,16 @@ class DashboardController < ApplicationController
       format.json { render json: @month_data }  # JSONレスポンスを返す
     end
   end
+
+  def week_data
+    start_date = params[:start_date].to_date
+  
+    # Dashboardモデルのメソッドを使用して、指定された週のデータを取得
+    week_data_with_tags = Dashboard.data_for_week_containing(start_date)
+  
+    render json: week_data_with_tags
+  end
+
 
   private
   
@@ -64,6 +102,7 @@ class DashboardController < ApplicationController
   end
 
   def dashboard_params
-    params.require(:dashboard).permit(:start_time, :finish_time)
+    params.require(:dashboard).permit(:start_time, :finish_time, tags: [])
   end
+
 end

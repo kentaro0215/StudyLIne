@@ -1,0 +1,20 @@
+<!-- app/views/dashboards/edit.html.erb -->
+<%= form_for @dashboard do |f| %>
+  <div class="flex flex-col items-center ">
+    <!-- フォームフィールドを追加 -->
+    <div class="field mb-4">
+      <%= f.label :start_time %>
+      <%= f.datetime_select :start_time %>
+    </div>
+    <div class="field mb-4">
+      <%= f.label :finish_time %>
+      <%= f.datetime_select :finish_time %>
+    </div>
+
+    <!-- 更新と削除ボタンを横並びに配置 -->
+    <div class="flex justify-center">
+      <%= f.submit "更新", class: "btn mr-2" %>
+      <%= button_to "削除", dashboard_path(@dashboard), method: :delete, form: {class: "inline"}, class: "btn ml-2" %>
+    </div>
+  </div>
+<% end %>

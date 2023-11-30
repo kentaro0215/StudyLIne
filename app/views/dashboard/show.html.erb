@@ -1,0 +1,13 @@
+<div class="collapse collapse-arrow bg-base-200">
+  <% @dashboards_of_day.each do |dashboard| %>
+    <%= link_to edit_dashboard_path(dashboard) do %>
+      <div class="card card-bordered w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+          <p>開始時間: <%= dashboard.start_time.strftime("%Y-%m-%d %H:%M") %></p>
+          <p>終了時間: <%= dashboard.finish_time.strftime("%Y-%m-%d %H:%M") %></p>
+          <p>合計時間: <%= format('%02d:%02d', dashboard.total_time / 60, dashboard.total_time % 60) %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,68 +1,79 @@
-<h1>Dashboard#after_login</h1>
-<div class="graph-container"> 
-  <button id="toggle-button">Toggle Graphs</button>
+<div>
+  <div id="token-container">
+    <button id="show-token-btn">トークンを表示</button>
+    <p id="token" style="display: none;"><%= current_user.custom_token %></p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('show-token-btn').addEventListener('click', function() {
+    var token = document.getElementById('token');
+    token.style.display = 'block';
+  });
+</script>
+
+<form id="date-form">
+  <label for="date-picker">日付を選択:</label>
+  <input type="date" id="date-picker" name="date">
+  <button type="submit">選択</button>
+</form>
+
+<script>
+document.getElementById('date-form').addEventListener('submit', function(event) {
+  const selectedDate = document.getElementById('date-picker').value;
+
+  // 日付が選択されていない場合、フォームの送信を阻止
+  if (!selectedDate) {
+    event.preventDefault();
+    alert('日付を選択してください。');
+    return;
+  }
+
+  // 日付に基づいて適切なURLを生成
+  const url = `/dashboard/show?date=${selectedDate}`;
+  window.location.href = url;
+});
+</script>
+
+<div class="graph-container">
+  <label for="toggle-graphs" >
+    <span class="label-text"></span>
+    <input type="checkbox" id="toggle-graphs" class="toggle" /> <!-- `checked`属性を削除 -->
+  </label>
   <div id="chart-container" style="display: block;">
-    <%= render partial: 'shared/chart' %>
+    <%= render partial: 'shared/line' %>
   </div>
   <div id="line-container" style="display: none;">
-    <%= render partial: 'shared/line' %>
+    <%= render partial: 'shared/chart' %>
   </div>
 </div>
 
 <script type="text/javascript">
-  document.getElementById('toggle-button').addEventListener('click', function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleSwitch = document.getElementById('toggle-graphs');
+
+    // `toggleSwitch.checked`の代わりに`false`を引数として渡す
+    initializeGraphDisplay(false);
+
+    toggleSwitch.addEventListener('change', function() {
+      updateGraphDisplay(this.checked);
+    });
+  });
+
+  function updateGraphDisplay(isChecked) {
     var chartContainer = document.getElementById('chart-container');
     var lineContainer = document.getElementById('line-container');
 
-    if (chartContainer.style.display === 'block') {
+    if (isChecked) {
       chartContainer.style.display = 'none';
       lineContainer.style.display = 'block';
     } else {
       chartContainer.style.display = 'block';
       lineContainer.style.display = 'none';
     }
-  });
-</script>
-
-<%
-=begin%>
- <!-- HTMLの<head>セクションに以下のコードを追加 -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- チャートを表示するためのHTML要素 -->
-<canvas id="totalTimeChart" width="400" height="200"></canvas>
-
-<script>
-var data = {
-  labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],  // セッション名または日付など
-  datasets: [{
-    label: 'Total Time (minutes)',
-    data: <%= @last_week_dashboards.flatten %>,  // これはRailsからのtotal_timeデータで置き換える必要があります
-    backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(255, 206, 86, 0.2)'
-    ],
-    borderColor: [
-      'rgba(255, 99, 132, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)'
-    ],
-    borderWidth: 1
-  }]
-};
-
-var ctx = document.getElementById('totalTimeChart').getContext('2d');
-var totalTimeChart = new Chart(ctx, {
-  type: 'bar',  // barタイプのグラフを指定
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
   }
-});
-</script> 
-<%
-=end%>
+
+  function initializeGraphDisplay(isChecked) {
+    updateGraphDisplay(isChecked);
+  }
+</script>
