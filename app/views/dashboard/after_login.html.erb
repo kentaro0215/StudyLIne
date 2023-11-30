@@ -1,16 +1,50 @@
-<h1>グラフ2種類</h1>
+<div>
+  <div id="token-container">
+    <button id="show-token-btn">トークンを表示</button>
+    <p id="token" style="display: none;"><%= current_user.custom_token %></p>
+  </div>
+</div>
 
-<button class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Responsive</button>
+<script>
+  document.getElementById('show-token-btn').addEventListener('click', function() {
+    var token = document.getElementById('token');
+    token.style.display = 'block';
+  });
+</script>
+
+<form id="date-form">
+  <label for="date-picker">日付を選択:</label>
+  <input type="date" id="date-picker" name="date">
+  <button type="submit">選択</button>
+</form>
+
+<script>
+document.getElementById('date-form').addEventListener('submit', function(event) {
+  const selectedDate = document.getElementById('date-picker').value;
+
+  // 日付が選択されていない場合、フォームの送信を阻止
+  if (!selectedDate) {
+    event.preventDefault();
+    alert('日付を選択してください。');
+    return;
+  }
+
+  // 日付に基づいて適切なURLを生成
+  const url = `/dashboard/show?date=${selectedDate}`;
+  window.location.href = url;
+});
+</script>
+
 <div class="graph-container">
   <label for="toggle-graphs" >
     <span class="label-text"></span>
     <input type="checkbox" id="toggle-graphs" class="toggle" /> <!-- `checked`属性を削除 -->
   </label>
   <div id="chart-container" style="display: block;">
-    <%= render partial: 'shared/chart' %>
+    <%= render partial: 'shared/line' %>
   </div>
   <div id="line-container" style="display: none;">
-    <%= render partial: 'shared/line' %>
+    <%= render partial: 'shared/chart' %>
   </div>
 </div>
 

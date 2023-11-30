@@ -1,8 +1,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
-  <button id="prev-week">先週</button>
+  <button id="prev-week">＜</button>
   <div id="week-range" style="margin: 0 20px;"></div>
-  <button id="next-week">次週</button>
+  <button id="next-week">＞</button>
 </div>
 
 <canvas id="studyTimeChart" width="400" height="200"></canvas>
@@ -106,6 +106,7 @@ function updateWeekRangeDisplay() {
         }
       // 対応する曜日にデータをセット
       dataset.data[adjustedDay] = dayData.data[tag] || 0;
+      dataset.id = dayData.id;  
 
       });
     });

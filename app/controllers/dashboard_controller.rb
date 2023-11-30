@@ -4,6 +4,33 @@ class DashboardController < ApplicationController
 
   def top_page
   end
+  
+  def show
+    selected_date = Date.parse(params[:date])
+    @dashboards_of_day = current_user.dashboards.where('DATE(start_time) = ?', selected_date)
+    # @dashboardをビューで使用して編集フォームを表示
+    @dashboard 
+  end
+
+  def edit
+    @dashboard = Dashboard.find(params[:id])
+  end
+
+  def update
+    @dashboard = current_user.dashboards.find(params[:id])
+    if @dashboard.update(dashboard_params)
+      @dashboard.calculate_total_time
+      redirect_to dashboard_after_login_path, notice: 'Dashboard was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @dashboard = current_user.dashboards.find(params[:id])
+    @dashboard.destroy
+    redirect_to dashboard_after_login_path, notice: 'Dashboard was successfully destroyed.'
+  end
 
   def start
     # 現在のユーザーに対して未完成のDashboardセッションを確認
@@ -57,9 +84,6 @@ class DashboardController < ApplicationController
     render json: week_data_with_tags
   end
 
-  def edit
-    
-  end
 
   private
   
@@ -78,6 +102,7 @@ class DashboardController < ApplicationController
   end
 
   def dashboard_params
-    params.require(:dashboard).permit(:start_time, :finish_time, :tags [])
+    params.require(:dashboard).permit(:start_time, :finish_time, tags: [])
   end
+
 end

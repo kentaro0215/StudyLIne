@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  # get 'dashboard/top_page'
-  # get 'dashboard/after_login'
-  root "dashboard#top_page" 
+  root "dashboard#top_page"
+  
+  # カスタムルート
   get "dashboard/after_login", to: "dashboard#after_login"
   get 'dashboard/after_login/:year/:month', to: 'dashboard#after_login', as: 'after_login_data'
   post "dashboard/start", to: "dashboard#start"
   post "dashboard/finish", to: "dashboard#finish"
   get 'dashboard/week_data', to: 'dashboard#week_data'
-  post 'dashboard/edit', to: 'dashboard#edit'
 
-  resources :dashboards do
+  # RESTfulリソース
+
+  resources :dashboard do
     resources :tags, only: [:create, :destroy]
   end
   

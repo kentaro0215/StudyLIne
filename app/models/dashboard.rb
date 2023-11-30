@@ -1,6 +1,6 @@
 class Dashboard < ApplicationRecord
   belongs_to :user
-  has_many :dashboard_tags
+  has_many :dashboard_tags, dependent: :destroy
   has_many :tags, through: :dashboard_tags
   
   def calculate_total_time
