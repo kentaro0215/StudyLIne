@@ -20,19 +20,19 @@
 
 <script>
 document.getElementById('date-form').addEventListener('submit', function(event) {
+  event.preventDefault();  // デフォルトのフォーム送信を阻止
   const selectedDate = document.getElementById('date-picker').value;
 
-  // 日付が選択されていない場合、フォームの送信を阻止
   if (!selectedDate) {
-    event.preventDefault();
     alert('日付を選択してください。');
     return;
   }
 
-  // 日付に基づいて適切なURLを生成
   const url = `/dashboard/show?date=${selectedDate}`;
-  window.location.href = url;
+  console.log('Redirecting to URL:', url);  // リダイレクトするURLをログに表示
+  window.location.href = url;  // URLにリダイレクト
 });
+
 </script>
 
 <div class="graph-container">
