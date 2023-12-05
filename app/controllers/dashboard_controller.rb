@@ -66,11 +66,12 @@ class DashboardController < ApplicationController
   end
 
   def after_login
+    Rails.logger.info "Current user: #{current_user.inspect}"
     @dashboards = current_user.dashboards
     @last_week_dashboards_with_tags = @dashboards.data_for_week_containing(Date.today)
     year = params[:year].present? ? params[:year].to_i : Time.now.year
     month = params[:month].present? ? params[:month].to_i : Time.now.month
-    @month_data = Dashboard.past_month_data(year, month)
+    @month_data = current_user.dashboards.past_month_data(year, month)
     @month_data = Hash[(1..@month_data.length).zip @month_data]
     respond_to do |format|
       format.html  # after_login.html.erbをレンダリング
@@ -82,7 +83,7 @@ class DashboardController < ApplicationController
     start_date = params[:start_date].to_date
   
     # Dashboardモデルのメソッドを使用して、指定された週のデータを取得
-    week_data_with_tags = Dashboard.data_for_week_containing(start_date)
+    week_data_with_tags = current_user.dashboards.data_for_week_containing(start_date)
   
     render json: week_data_with_tags
   end
