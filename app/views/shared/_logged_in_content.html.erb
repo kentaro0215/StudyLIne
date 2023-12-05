@@ -1,46 +1,11 @@
 <div>
-  <div id="token-container" class="flex items-center">
-    <button id="show-token-btn" onclick="toggleTokenVisibility()">トークンを表示</button>
-    <p id="token" style="display: none; margin-right: 10px;">
-      export CUSTOM_TOKEN="<%= current_user.custom_token %>"
-    </p>
-    <button id="copy-token-btn" onclick="copyToken()" style="display: none;">コピー</button>
+  <div id="token-container">
+    <button id="show-token-btn">トークンを表示</button>
+    <p id="token" style="display: none;"><%= current_user.custom_token %></p>
   </div>
-  <p id="message"></p>
 </div>
 
-<script>
-  function toggleTokenVisibility() {
-    var tokenElement = document.getElementById('token');
-    var copyButton = document.getElementById('copy-token-btn');
-
-    if (tokenElement.style.display === 'none') {
-      tokenElement.style.display = 'block';
-      copyButton.style.display = 'inline-block';
-    } else {
-      tokenElement.style.display = 'none';
-      copyButton.style.display = 'none';
-    }
-  }
-
-  function copyToken() {
-    var tokenText = document.getElementById('token').textContent.trim();
-    var messageElement = document.getElementById('message');
-
-    navigator.clipboard.writeText(tokenText).then(function() {
-      messageElement.textContent = 'クリップボードにコピーしました！';
-      messageElement.style.color = 'green';
-    }, function(err) {
-      messageElement.textContent = 'コピーに失敗しました：' + err;
-      messageElement.style.color = 'red';
-    });
-  }
-</script>
-
-
-  <%
-=begin%>
- <div id="dashboard-data">
+  <div id="dashboard-data">
     <% if current_user.dashboards.any? %>
       <h3>ダッシュボードデータ:</h3>
       <ul>
@@ -54,9 +19,7 @@
       <p>ダッシュボードデータがありません。</p>
     <% end %>
   </div>
-</div> 
-<%
-=end%>
+</div>
 
 <div>
 <script>

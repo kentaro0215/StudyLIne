@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, only: [:start, :finish]
+  before_action :authenticate_user!, except: [:top_page]
   protect_from_forgery except: [:start, :finish] 
 
   def top_page
@@ -66,7 +66,7 @@ class DashboardController < ApplicationController
   end
 
   def after_login
-    Rails.logger.info "Current user: #{current_user.inspect}"
+    logger.info "Request Headers: #{request.headers.to_h}"
     @dashboards = current_user.dashboards
     @last_week_dashboards_with_tags = @dashboards.data_for_week_containing(Date.today)
     year = params[:year].present? ? params[:year].to_i : Time.now.year
@@ -91,16 +91,6 @@ class DashboardController < ApplicationController
 
   private
   
-  def authenticate_user!
-    token = request.headers['Authorization'].split('Bearer ').last
-    user = User.find_by(custom_token: token)
-    head :unauthorized unless user
-  end
-
-  # def current_user
-  #   @current_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
-  # end
-
   def token_user
     @token_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
   end
