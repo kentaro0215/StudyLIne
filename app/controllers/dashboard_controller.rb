@@ -7,9 +7,12 @@ class DashboardController < ApplicationController
   
   def show
     selected_date = Date.parse(params[:date])
-    @dashboards_of_day = current_user.dashboards.where('DATE(start_time) = ?', selected_date)
+    start_of_day = selected_date.beginning_of_day
+    end_of_day = selected_date.end_of_day
+  
+    @dashboards_of_day = current_user.dashboards.where(start_time: start_of_day..end_of_day)
     # @dashboardをビューで使用して編集フォームを表示
-    @dashboard 
+    @dashboard
   end
 
   def edit
