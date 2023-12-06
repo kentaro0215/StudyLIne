@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, except: [:top_page]
+  before_action :authenticate_user!, except: [:top_page, :after_login, :week_data]
   protect_from_forgery except: [:start, :finish] 
 
   def top_page
@@ -91,6 +91,11 @@ class DashboardController < ApplicationController
 
   private
   
+  
+  # def current_user
+  #   @current_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
+  # end
+
   def token_user
     @token_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
   end
