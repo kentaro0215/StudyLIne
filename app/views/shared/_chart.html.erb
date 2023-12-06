@@ -5,7 +5,7 @@
   <button id="next-week">＞</button>
 </div>
 
-<canvas id="studyTimeChart" width="400" height="150"></canvas>
+<canvas id="studyTimeChart" width="400" height="200"></canvas>
 
 <script>
   const labels =  ['月', '火', '水', '木', '金', '土', '日'];
@@ -43,6 +43,7 @@ function updateWeekRangeDisplay() {
 
   async function updateChart(rawData) {
     console.log(rawData)
+      let maxTime = 0;
 
     const datasets = [];
     
@@ -136,6 +137,8 @@ function updateWeekRangeDisplay() {
         scales: {
           y: {
             beginAtZero: true,
+            min: 0,
+            max: Math.max(360, maxTime), // 最大値を動的に決定
             ticks: {
                       stepSize:60,
                         callback: function(value, index, values){

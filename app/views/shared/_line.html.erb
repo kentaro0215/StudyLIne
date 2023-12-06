@@ -1,5 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+<!-- 合計時間を表示するための要素を追加 -->
+<div id="total-study-time" class="text-lg font-semibold"></div>
 
 <select id="month-selector" class="select select-bordered max-w-xs">
   <option value="1">1月</option>
@@ -42,6 +44,18 @@
 
           const values = Object.values(response.data);
           console.log(values);
+
+            const totalStudyMinutes = values.reduce((acc, cur) => acc + cur, 0);
+  
+  // 時間と分に分割
+  const hours = Math.floor(totalStudyMinutes / 60);
+  const minutes = totalStudyMinutes % 60;
+
+  // ゼロ埋めしてフォーマット
+  const formattedTotalTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+  
+  document.getElementById('total-study-time').textContent = `合計勉強時間: ${formattedTotalTime}`;
+
     
           const daysInMonth = new Date(year, month, 0).getDate();
           const labels = Array.from({ length: daysInMonth }, (_, i) => i + 1); // 日付のみの配列を生成
@@ -68,6 +82,8 @@
                 scales: {
                     y: {
                         beginAtZero: true,
+                        min: 0,
+                        max: Math.max(360, Math.max(...values)), // 最大値を動的に決定
                         ticks: {
                           stepSize:60,
                           callback: function(value, index, values){
