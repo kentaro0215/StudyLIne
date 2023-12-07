@@ -1,11 +1,11 @@
 <div class="navbar bg-primary text-primary-content">
-  <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+  <%= link_to 'StudyLine', dashboard_after_login_path, class: 'btn btn-ghost normal-case text-xl' %>
 
-<% if user_signed_in? %>
-  <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
-
-<% else %>
-<%= button_to "Sign Up with Google", user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-secondary" %>
-<% end %>
-
+  <div class="ml-auto">
+    <% if user_signed_in? %>
+      <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-accent" %>
+    <% else %>
+      <%= button_to "Sign Up with Google", user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-accent" %>
+    <% end %>
+  </div>
 </div>

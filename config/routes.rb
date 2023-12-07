@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post "dashboard/start", to: "dashboard#start"
   post "dashboard/finish", to: "dashboard#finish"
   get 'dashboard/week_data', to: 'dashboard#week_data'
+  get 'dashboard/how_to_use', to: 'dashboard#how_to_use'
 
   # RESTfulリソース
 

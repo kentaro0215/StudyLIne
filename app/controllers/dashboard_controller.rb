@@ -1,15 +1,22 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, only: [:start, :finish]
+  before_action :authenticate_token_user!, only: [:start, :finish]
+  before_action :authenticate_user!, except: [:top_page, :start, :finish, :how_to_use]
   protect_from_forgery except: [:start, :finish] 
 
   def top_page
+    if user_signed_in?
+      redirect_to dashboard_after_login_path
+    end
   end
   
   def show
     selected_date = Date.parse(params[:date])
-    @dashboards_of_day = current_user.dashboards.where('DATE(start_time) = ?', selected_date)
+    start_of_day = selected_date.beginning_of_day
+    end_of_day = selected_date.end_of_day
+  
+    @dashboards_of_day = current_user.dashboards.where(start_time: start_of_day..end_of_day)
     # @dashboardをビューで使用して編集フォームを表示
-    @dashboard 
+    @dashboard
   end
 
   def edit
@@ -63,11 +70,12 @@ class DashboardController < ApplicationController
   end
 
   def after_login
+    logger.info "Request Headers: #{request.headers.to_h}"
     @dashboards = current_user.dashboards
     @last_week_dashboards_with_tags = @dashboards.data_for_week_containing(Date.today)
     year = params[:year].present? ? params[:year].to_i : Time.now.year
     month = params[:month].present? ? params[:month].to_i : Time.now.month
-    @month_data = Dashboard.past_month_data(year, month)
+    @month_data = current_user.dashboards.past_month_data(year, month)
     @month_data = Hash[(1..@month_data.length).zip @month_data]
     respond_to do |format|
       format.html  # after_login.html.erbをレンダリング
@@ -79,20 +87,23 @@ class DashboardController < ApplicationController
     start_date = params[:start_date].to_date
   
     # Dashboardモデルのメソッドを使用して、指定された週のデータを取得
-    week_data_with_tags = Dashboard.data_for_week_containing(start_date)
+    week_data_with_tags = current_user.dashboards.data_for_week_containing(start_date)
   
     render json: week_data_with_tags
   end
 
+  def how_to_use
+  end
 
   private
-  
-  def authenticate_user!
+
+  def authenticate_token_user!
     token = request.headers['Authorization'].split('Bearer ').last
     user = User.find_by(custom_token: token)
     head :unauthorized unless user
   end
-
+  
+  
   # def current_user
   #   @current_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
   # end

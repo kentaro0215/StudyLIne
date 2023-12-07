@@ -1,52 +1,121 @@
-<div>
-  <div id="token-container">
-    <button id="show-token-btn">トークンを表示</button>
-    <p id="token" style="display: none;"><%= current_user.custom_token %></p>
+<%
+=begin%>
+ <div>
+  <div id="token-container" class="flex items-center">
+    <button id="show-token-btn" onclick="toggleTokenVisibility()">トークンを表示</button>
+    <p id="token" style="display: none; margin-right: 10px;">
+      export CUSTOM_TOKEN="<%= current_user.custom_token %>"
+    </p>
+    <button id="copy-token-btn" onclick="copyToken()" style="display: none;">コピー</button>
   </div>
+  <p id="message"></p>
 </div>
 
+<script>
+  function toggleTokenVisibility() {
+    var tokenElement = document.getElementById('token');
+    var copyButton = document.getElementById('copy-token-btn');
+
+    if (tokenElement.style.display === 'none') {
+      tokenElement.style.display = 'block';
+      copyButton.style.display = 'inline-block';
+    } else {
+      tokenElement.style.display = 'none';
+      copyButton.style.display = 'none';
+    }
+  }
+
+  function copyToken() {
+    var tokenText = document.getElementById('token').textContent.trim();
+    var messageElement = document.getElementById('message');
+
+    navigator.clipboard.writeText(tokenText).then(function() {
+      messageElement.textContent = 'クリップボードにコピーしました！';
+      messageElement.style.color = 'green';
+    }, function(err) {
+      messageElement.textContent = 'コピーに失敗しました：' + err;
+      messageElement.style.color = 'red';
+    });
+  }
+</script> 
+<%
+=end%>
+
+
+  <%
+=begin%>
+ <div id="dashboard-data">
+    <% if current_user.dashboards.any? %>
+      <h3>ダッシュボードデータ:</h3>
+      <ul>
+        <% current_user.dashboards.each do |dashboard| %>
+          <li>
+            <%= "ID: #{dashboard.id}, 開始時間: #{dashboard.start_time}, 終了時間: #{dashboard.finish_time}, 総時間: #{dashboard.total_time}" %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>ダッシュボードデータがありません。</p>
+    <% end %>
+  </div>
+</div> 
+<%
+=end%>
+<%
+=begin%>
+ 
+<div>
 <script>
   document.getElementById('show-token-btn').addEventListener('click', function() {
     var token = document.getElementById('token');
     token.style.display = 'block';
   });
-</script>
+</script> 
+<%
+=end%>
 
-<form id="date-form">
-  <label for="date-picker">日付を選択:</label>
-  <input type="date" id="date-picker" name="date">
-  <button type="submit">選択</button>
-</form>
+<!-- 日付選択フォーム -->
+<div class="p-2">
+  <form id="date-form" class="inline-block">
+    <label for="date-picker">日付を選択:</label>
+    <input type="date" id="date-picker" name="date" class="input input-bordered p-2">
+    <button type="submit" class="btn btn-primary ml-2">選択</button>
+  </form>
+</div>
+
+<!-- グラフ表示コンテナ -->
+<div class="graph-container text-left mb-4 p-4">
+  <input type="checkbox" id="toggle-graphs" class="toggle p-2" />
+  <div id="chart-container" class="block p-4">
+    <%= render partial: 'shared/line' %>
+  </div>
+  <div id="line-container" class="hidden p-4">
+    <%= render partial: 'shared/chart' %>
+  </div>
+</div>
+
+
+
 
 <script>
 document.getElementById('date-form').addEventListener('submit', function(event) {
+  event.preventDefault();  // デフォルトのフォーム送信を阻止
   const selectedDate = document.getElementById('date-picker').value;
 
-  // 日付が選択されていない場合、フォームの送信を阻止
   if (!selectedDate) {
-    event.preventDefault();
     alert('日付を選択してください。');
     return;
   }
 
-  // 日付に基づいて適切なURLを生成
   const url = `/dashboard/show?date=${selectedDate}`;
-  window.location.href = url;
+  console.log('Redirecting to URL:', url);  // リダイレクトするURLをログに表示
+  window.location.href = url;  // URLにリダイレクト
 });
+
 </script>
 
-<div class="graph-container">
-  <label for="toggle-graphs" >
-    <span class="label-text"></span>
-    <input type="checkbox" id="toggle-graphs" class="toggle" /> <!-- `checked`属性を削除 -->
-  </label>
-  <div id="chart-container" style="display: block;">
-    <%= render partial: 'shared/line' %>
-  </div>
-  <div id="line-container" style="display: none;">
-    <%= render partial: 'shared/chart' %>
-  </div>
-</div>
+  <!-- グラフ表示トグル -->
+
 
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
