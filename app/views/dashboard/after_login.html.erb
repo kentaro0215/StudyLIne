@@ -1,4 +1,6 @@
-<div>
+<%
+=begin%>
+ <div>
   <div id="token-container" class="flex items-center">
     <button id="show-token-btn" onclick="toggleTokenVisibility()">トークンを表示</button>
     <p id="token" style="display: none; margin-right: 10px;">
@@ -35,7 +37,9 @@
       messageElement.style.color = 'red';
     });
   }
-</script>
+</script> 
+<%
+=end%>
 
 
   <%
@@ -57,20 +61,41 @@
 </div> 
 <%
 =end%>
-
+<%
+=begin%>
+ 
 <div>
 <script>
   document.getElementById('show-token-btn').addEventListener('click', function() {
     var token = document.getElementById('token');
     token.style.display = 'block';
   });
-</script>
+</script> 
+<%
+=end%>
 
-<form id="date-form">
-  <label for="date-picker">日付を選択:</label>
-  <input type="date" id="date-picker" name="date">
-  <button type="submit">選択</button>
-</form>
+<!-- 日付選択フォーム -->
+<div class="p-2">
+  <form id="date-form" class="inline-block">
+    <label for="date-picker">日付を選択:</label>
+    <input type="date" id="date-picker" name="date" class="input input-bordered p-2">
+    <button type="submit" class="btn btn-primary ml-2">選択</button>
+  </form>
+</div>
+
+<!-- グラフ表示コンテナ -->
+<div class="graph-container text-left mb-4 p-4">
+  <input type="checkbox" id="toggle-graphs" class="toggle p-2" />
+  <div id="chart-container" class="block p-4">
+    <%= render partial: 'shared/line' %>
+  </div>
+  <div id="line-container" class="hidden p-4">
+    <%= render partial: 'shared/chart' %>
+  </div>
+</div>
+
+
+
 
 <script>
 document.getElementById('date-form').addEventListener('submit', function(event) {
@@ -89,18 +114,8 @@ document.getElementById('date-form').addEventListener('submit', function(event) 
 
 </script>
 
-<div class="graph-container">
-  <label for="toggle-graphs" >
-    <span class="label-text"></span>
-    <input type="checkbox" id="toggle-graphs" class="toggle" /> <!-- `checked`属性を削除 -->
-  </label>
-  <div id="chart-container" style="display: block;">
-    <%= render partial: 'shared/line' %>
-  </div>
-  <div id="line-container" style="display: none;">
-    <%= render partial: 'shared/chart' %>
-  </div>
-</div>
+  <!-- グラフ表示トグル -->
+
 
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {

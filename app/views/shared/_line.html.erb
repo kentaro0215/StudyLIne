@@ -60,6 +60,11 @@
           const daysInMonth = new Date(year, month, 0).getDate();
           const labels = Array.from({ length: daysInMonth }, (_, i) => i + 1); // 日付のみの配列を生成
 
+          const defaultMaxValue = 360; // 6時間
+          const maxValue = Math.ceil(Math.max(...values) / 60) * 60;
+          const finalMaxValue = Math.max(defaultMaxValue, maxValue);
+
+
     
           if (myChart) {
             // 既存のグラフを削除
@@ -83,7 +88,7 @@
                     y: {
                         beginAtZero: true,
                         min: 0,
-                        max: Math.max(360, Math.max(...values)), // 最大値を動的に決定
+                        max: finalMaxValue,
                         ticks: {
                           stepSize:60,
                           callback: function(value, index, values){

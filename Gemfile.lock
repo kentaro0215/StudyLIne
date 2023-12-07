@@ -124,6 +124,8 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.2)
+    meta-tags (2.19.0)
+      actionpack (>= 3.2.0, < 7.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.20.0)
@@ -260,6 +262,7 @@ DEPENDENCIES
   httparty
   jbuilder
   jsbundling-rails
+  meta-tags
   omniauth (~> 1.9)
   omniauth-google-oauth2
   omniauth-rails_csrf_protection

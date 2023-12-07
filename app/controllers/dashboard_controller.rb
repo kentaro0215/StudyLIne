@@ -4,6 +4,9 @@ class DashboardController < ApplicationController
   protect_from_forgery except: [:start, :finish] 
 
   def top_page
+    if user_signed_in?
+      redirect_to dashboard_after_login_path
+    end
   end
   
   def show

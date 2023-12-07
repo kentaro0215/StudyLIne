@@ -5,7 +5,7 @@
   <button id="next-week">＞</button>
 </div>
 
-<canvas id="studyTimeChart" width="400" height="200"></canvas>
+<canvas id="studyTimeChart" width="250" height="100"></canvas>
 
 <script>
   const labels =  ['月', '火', '水', '木', '金', '土', '日'];
@@ -120,6 +120,15 @@ function updateWeekRangeDisplay() {
       }
     });
 
+    // datasets 内のすべてのデータポイントを一つの配列に結合
+    const allDataPoints = datasets.reduce((acc, dataset) => acc.concat(dataset.data), []);
+    
+    // 最大値を計算
+    const defaultMaxValue = 360; // 6時間
+    const maxValue = Math.ceil(Math.max(...allDataPoints) / 60) * 60;
+    const finalMaxValue = Math.max(defaultMaxValue, maxValue);
+
+
     if (studyTimeChart) {
       studyTimeChart.destroy();
     }
@@ -138,7 +147,7 @@ function updateWeekRangeDisplay() {
           y: {
             beginAtZero: true,
             min: 0,
-            max: Math.max(360, maxTime), // 最大値を動的に決定
+            max: finalMaxValue, // ここで計算した最大値を使用
             ticks: {
                       stepSize:60,
                         callback: function(value, index, values){

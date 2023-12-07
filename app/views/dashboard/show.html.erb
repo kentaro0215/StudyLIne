@@ -1,6 +1,8 @@
 <div class="collapse collapse-arrow bg-base-200">
   <% if @dashboards_of_day.empty? %>
-    <p>表示するデータがありません。</p>
+    <div class="p-4 text-center text-lg font-bold text-red-500">
+      表示するデータがありません。
+    </div>
   <% else %>
     <% @dashboards_of_day.each do |dashboard| %>
       <%= link_to edit_dashboard_path(dashboard) do %>
