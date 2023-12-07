@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_token_user!, only: [:start, :finish]
-  before_action :authenticate_user!, except: [:top_page, :start, :finish]
+  before_action :authenticate_user!, except: [:top_page, :start, :finish, :how_to_use]
   protect_from_forgery except: [:start, :finish] 
 
   def top_page
@@ -89,6 +89,8 @@ class DashboardController < ApplicationController
     render json: week_data_with_tags
   end
 
+  def how_to_use
+  end
 
   private
 

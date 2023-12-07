@@ -10,7 +10,9 @@
 <%
 =end%>
     <div class="footer-links">
-    <a href="#" class="footer-link">使い方</a>
+    <% if user_signed_in? %>
+    <a href="/dashboard/how_to_use" class="footer-link">使い方</a>
+    <%end%>
     <a href="#" class="footer-link">プライバシーポリシー</a>
     <a href="#" class="footer-link">利用規約</a>
   </div>

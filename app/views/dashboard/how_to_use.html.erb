@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StudyLine Gem 使用方法</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>StudyLine Gem 使用方法</h1>
+        <section>
+            <h2>Rubyのバージョン確認</h2>
+            <p>Gem <code>study_line</code> はRuby 2.6.0以上でのみ使用可能です。</p>
+            <p>Rubyのバージョンを確認するには、以下のコマンドを実行します：</p>
+            <code>ruby -v</code><br>
+            <code>rbenv versions</code>
+        </section>
+
+        <section>
+            <h2>環境変数にトークンを保存</h2>
+            <p>ログイン後、トークンを環境変数に保存します。</p>
+            <p><strong>zshを使用している場合:</strong></p>
+            <code>echo 'export CUSTOM_TOKEN="<%= current_user.custom_token %>"' &gt;&gt; ~/.zshrc</code><br>
+            <code>source ~/.zshrc</code>
+            <p><strong>bashを使用している場合:</strong></p>
+            <code>echo 'export CUSTOM_TOKEN="<%= current_user.custom_token %>"' &gt;&gt; ~/.bashrc</code><br>
+            <code>source ~/.bashrc</code>
+        </section>
+
+        <section>
+            <h2>Gemのインストール</h2>
+            <p><code>study_line</code> Gemをインストールするには、以下のコマンドを使用します：</p>
+            <code>gem install study_line</code>
+            <p>これにより、ターミナルから以下のコマンドが使用可能になります。</p>
+        </section>
+
+        <section>
+            <h2>コマンド</h2>
+            <ul>
+                <li><code>stl start</code>: 学習開始</li>
+                <li><code>stl finish</code>: 学習終了</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>オプション</h2>
+            <p>タグと学習時間の記録を作成することができます。例：</p>
+            <code>stl start -t "タグ名"</code>
+        </section>
+    </div>
+</body>
+</html>
