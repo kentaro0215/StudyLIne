@@ -40,10 +40,8 @@
               });
 
           const data = response.data;
-          console.log(data);
 
           const values = Object.values(response.data);
-          console.log(values);
 
             const totalStudyMinutes = values.reduce((acc, cur) => acc + cur, 0);
   
