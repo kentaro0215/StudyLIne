@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="wireframe">
   <head>
     <title>StudyLine</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,9 +8,21 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= display_meta_tags(default_meta_tags) %>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WYW4RF2P8W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WYW4RF2P8W');
+</script>
   </head>
 
   <body>
+    <%= render "layouts/header" %>
     <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

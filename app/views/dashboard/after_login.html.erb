@@ -1,0 +1,148 @@
+<%
+=begin%>
+ <div>
+  <div id="token-container" class="flex items-center">
+    <button id="show-token-btn" onclick="toggleTokenVisibility()">トークンを表示</button>
+    <p id="token" style="display: none; margin-right: 10px;">
+      export CUSTOM_TOKEN="<%= current_user.custom_token %>"
+    </p>
+    <button id="copy-token-btn" onclick="copyToken()" style="display: none;">コピー</button>
+  </div>
+  <p id="message"></p>
+</div>
+
+<script>
+  function toggleTokenVisibility() {
+    var tokenElement = document.getElementById('token');
+    var copyButton = document.getElementById('copy-token-btn');
+
+    if (tokenElement.style.display === 'none') {
+      tokenElement.style.display = 'block';
+      copyButton.style.display = 'inline-block';
+    } else {
+      tokenElement.style.display = 'none';
+      copyButton.style.display = 'none';
+    }
+  }
+
+  function copyToken() {
+    var tokenText = document.getElementById('token').textContent.trim();
+    var messageElement = document.getElementById('message');
+
+    navigator.clipboard.writeText(tokenText).then(function() {
+      messageElement.textContent = 'クリップボードにコピーしました！';
+      messageElement.style.color = 'green';
+    }, function(err) {
+      messageElement.textContent = 'コピーに失敗しました：' + err;
+      messageElement.style.color = 'red';
+    });
+  }
+</script> 
+<%
+=end%>
+
+
+  <%
+=begin%>
+ <div id="dashboard-data">
+    <% if current_user.dashboards.any? %>
+      <h3>ダッシュボードデータ:</h3>
+      <ul>
+        <% current_user.dashboards.each do |dashboard| %>
+          <li>
+            <%= "ID: #{dashboard.id}, 開始時間: #{dashboard.start_time}, 終了時間: #{dashboard.finish_time}, 総時間: #{dashboard.total_time}" %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>ダッシュボードデータがありません。</p>
+    <% end %>
+  </div>
+</div> 
+<%
+=end%>
+<%
+=begin%>
+ 
+<div>
+<script>
+  document.getElementById('show-token-btn').addEventListener('click', function() {
+    var token = document.getElementById('token');
+    token.style.display = 'block';
+  });
+</script> 
+<%
+=end%>
+
+<!-- 日付選択フォーム -->
+<div class="p-2">
+  <form id="date-form" class="inline-block">
+    <label for="date-picker">日付を選択:</label>
+    <input type="date" id="date-picker" name="date" class="input input-bordered p-2">
+    <button type="submit" class="btn btn-primary ml-2">選択</button>
+  </form>
+</div>
+
+<!-- グラフ表示コンテナ -->
+<div class="graph-container text-left mb-4 p-4">
+  <input type="checkbox" id="toggle-graphs" class="toggle p-2" />
+  <div id="chart-container" class="block p-4">
+    <%= render partial: 'shared/line' %>
+  </div>
+  <div id="line-container" class="hidden p-4">
+    <%= render partial: 'shared/chart' %>
+  </div>
+</div>
+
+
+
+
+<script>
+document.getElementById('date-form').addEventListener('submit', function(event) {
+  event.preventDefault();  // デフォルトのフォーム送信を阻止
+  const selectedDate = document.getElementById('date-picker').value;
+
+  if (!selectedDate) {
+    alert('日付を選択してください。');
+    return;
+  }
+
+  const url = `/dashboard/show?date=${selectedDate}`;
+  console.log('Redirecting to URL:', url);  // リダイレクトするURLをログに表示
+  window.location.href = url;  // URLにリダイレクト
+});
+
+</script>
+
+  <!-- グラフ表示トグル -->
+
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleSwitch = document.getElementById('toggle-graphs');
+
+    // `toggleSwitch.checked`の代わりに`false`を引数として渡す
+    initializeGraphDisplay(false);
+
+    toggleSwitch.addEventListener('change', function() {
+      updateGraphDisplay(this.checked);
+    });
+  });
+
+  function updateGraphDisplay(isChecked) {
+    var chartContainer = document.getElementById('chart-container');
+    var lineContainer = document.getElementById('line-container');
+
+    if (isChecked) {
+      chartContainer.style.display = 'none';
+      lineContainer.style.display = 'block';
+    } else {
+      chartContainer.style.display = 'block';
+      lineContainer.style.display = 'none';
+    }
+  }
+
+  function initializeGraphDisplay(isChecked) {
+    updateGraphDisplay(isChecked);
+  }
+</script>
