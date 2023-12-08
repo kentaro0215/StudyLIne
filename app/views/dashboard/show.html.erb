@@ -1,6 +1,6 @@
 <div class="collapse collapse-arrow bg-base-200">
   <% if @dashboards_of_day.empty? %>
-    <div class="p-4 text-center text-lg font-bold ">
+    <div class="p-4 text-center text-lg font-bold">
       表示するデータがありません。
     </div>
   <% else %>
@@ -9,8 +9,13 @@
         <div class="card card-bordered w-96 bg-base-100 shadow-xl">
           <div class="card-body">
             <p>開始時間: <%= dashboard.start_time.strftime("%Y-%m-%d %H:%M") %></p>
-            <p>終了時間: <%= dashboard.finish_time.strftime("%Y-%m-%d %H:%M") %></p>
-            <p>合計時間: <%= format('%02d:%02d', dashboard.total_time / 60, dashboard.total_time % 60) %></p>
+            <p>終了時間: <%= dashboard.finish_time ? dashboard.finish_time.strftime("%Y-%m-%d %H:%M") : "未設定" %></p>
+            <p>合計時間: <%= dashboard.total_time ? format('%02d:%02d', dashboard.total_time / 60, dashboard.total_time % 60) : "未計算" %></p>
+            <% if dashboard.tags.any? %>
+              <p>タグ: <%= dashboard.tags.map(&:name).join(", ") %></p>
+            <% else %>
+              <p>タグ: なし</p>
+            <% end %>
           </div>
         </div>
       <% end %>

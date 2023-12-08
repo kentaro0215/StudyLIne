@@ -61,11 +61,12 @@ class DashboardController < ApplicationController
   
   def finish
     @dashboard = token_user.dashboards.find_by(finish_time: nil)
-    if @dashboard&.update(finish_time: params[:finish_time])
+    if @dashboard
+      @dashboard&.update(finish_time: params[:finish_time])
       @dashboard.calculate_total_time
       render json: { status: 'success', data: @dashboard }, status: :ok
     else
-      render json: { status: 'error', message: @dashboard ? @dashboard.errors.full_messages : 'Dashboard not found' }, status: :unprocessable_entity
+      render json: { status: 'error', message: 'Please run the `start` command first.' }, status: :unprocessable_entity
     end
   end
 
