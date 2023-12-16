@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -13,13 +15,11 @@ class User < ApplicationRecord
     data = auth.info
     user = User.where(email: data['email']).first
 
-    unless user
-      user = User.create(name: data['name'],email: data['email'],
-      custom_token: Devise.friendly_token[0,20])
-    end
+    user ||= User.create(name: data['name'], email: data['email'],
+                         custom_token: Devise.friendly_token[0, 20])
     authorization = user.authorizations.find_or_create_by(provider: auth.provider, uid: auth.uid)
     authorization.save
-    
+
     user
   end
 
@@ -27,9 +27,8 @@ class User < ApplicationRecord
     dashboards.joins(:tags).select('tags.*').distinct
   end
 
-  #　タグごとの勉強時間を計算
+  # 　タグごとの勉強時間を計算
   def tag_total_time
     dashboards.joins(:tags).group('tags.name').sum('dashboards.total_time')
   end
-
 end

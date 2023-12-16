@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 class DashboardController < ApplicationController
-  before_action :authenticate_token_user!, only: [:start, :finish]
-  before_action :authenticate_user!, except: [:top_page, :start, :finish, :how_to_use]
-  protect_from_forgery except: [:start, :finish] 
+  before_action :authenticate_token_user!, only: %i[start finish]
+  before_action :authenticate_user!, except: %i[top_page start finish how_to_use]
+  protect_from_forgery except: %i[start finish]
 
   def top_page
-    if user_signed_in?
-      redirect_to dashboard_after_login_path
-    end
+    return unless user_signed_in?
+
+    redirect_to dashboard_after_login_path
   end
-  
+
   def show
     selected_date = Date.parse(params[:date])
     start_of_day = selected_date.beginning_of_day
     end_of_day = selected_date.end_of_day
-  
+
     @dashboards_of_day = current_user.dashboards.where(start_time: start_of_day..end_of_day)
     # @dashboardをビューで使用して編集フォームを表示
     @dashboard
@@ -42,13 +44,13 @@ class DashboardController < ApplicationController
   def start
     # 現在のユーザーに対して未完成のDashboardセッションを確認
     ongoing_session = token_user.dashboards.find_by(finish_time: nil)
-    
+
     # 未完成のセッションが見つかった場合はエラーを返す
     if ongoing_session
       render json: { error: 'An ongoing study session already exists.' }, status: :bad_request
       return
     end
-    
+
     # 新しいDashboardセッションを作成
     @dashboard = token_user.dashboards.new(start_time: params[:start_time])
     @dashboard.assign_tags_by_name(params[:tags]) if params[:tags].present?
@@ -58,7 +60,7 @@ class DashboardController < ApplicationController
       render json: { status: 'error', message: @dashboard.errors.full_messages }, status: :unprocessable_entity
     end
   end
-  
+
   def finish
     @dashboard = token_user.dashboards.find_by(finish_time: nil)
     if @dashboard
@@ -79,22 +81,21 @@ class DashboardController < ApplicationController
     @month_data = current_user.dashboards.past_month_data(year, month)
     @month_data = Hash[(1..@month_data.length).zip @month_data]
     respond_to do |format|
-      format.html  # after_login.html.erbをレンダリング
-      format.json { render json: @month_data }  # JSONレスポンスを返す
+      format.html # after_login.html.erbをレンダリング
+      format.json { render json: @month_data } # JSONレスポンスを返す
     end
   end
 
   def week_data
     start_date = params[:start_date].to_date
-  
+
     # Dashboardモデルのメソッドを使用して、指定された週のデータを取得
     week_data_with_tags = current_user.dashboards.data_for_week_containing(start_date)
-  
+
     render json: week_data_with_tags
   end
 
-  def how_to_use
-  end
+  def how_to_use; end
 
   private
 
@@ -103,8 +104,7 @@ class DashboardController < ApplicationController
     user = User.find_by(custom_token: token)
     head :unauthorized unless user
   end
-  
-  
+
   # def current_user
   #   @current_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
   # end
@@ -116,5 +116,4 @@ class DashboardController < ApplicationController
   def dashboard_params
     params.require(:dashboard).permit(:start_time, :finish_time, tags: [])
   end
-
 end
