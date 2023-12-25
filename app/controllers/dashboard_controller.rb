@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class DashboardController < ApplicationController
-  before_action :authenticate_token_user!, only: %i[start finish]
   before_action :authenticate_user!, except: %i[top_page start finish how_to_use]
   protect_from_forgery except: %i[start finish]
 
   def top_page
     return unless user_signed_in?
-    redirect_to dashboard_after_login_path
+    redirect_to dashboard_index_path
   end
 
   def show
@@ -28,7 +27,7 @@ class DashboardController < ApplicationController
     @study_record = current_user.study_records.find(params[:id])
     if @study_record.update(study_record_params)
       @study_record.calculate_total_time
-      redirect_to study_record_after_login_path, notice: 'study_record was successfully updated.'
+      redirect_to dashboard_index_path, notice: 'study_record was successfully updated.'
     else
       render :edit
     end
@@ -37,41 +36,10 @@ class DashboardController < ApplicationController
   def destroy
     @study_record = current_user.study_records.find(params[:id])
     @study_record.destroy
-    redirect_to dashboard_after_login_path, notice: 'study_record was successfully destroyed.'
+    redirect_to dashboard_index_path, notice: 'study_record was successfully destroyed.'
   end
 
-  def start
-    # 現在のユーザーに対して未完成のstudy_recordセッションを確認
-    ongoing_session = token_user.study_records.find_by(finish_time: nil)
-
-    # 未完成のセッションが見つかった場合はエラーを返す
-    if ongoing_session
-      render json: { error: 'An ongoing study session already exists.' }, status: :bad_request
-      return
-    end
-
-    # 新しいstudy_recordセッションを作成
-    @study_record = token_user.study_records.new(start_time: params[:start_time])
-    @study_record.assign_tags_by_name(params[:tags]) if params[:tags].present?
-    if @study_record.save
-      render json: { status: 'success', data: @study_record }, status: :ok
-    else
-      render json: { status: 'error', message: @study_record.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
-  def finish
-    @study_record = token_user.study_records.find_by(finish_time: nil)
-    if @study_record
-      @study_record&.update(finish_time: params[:finish_time])
-      @study_record.calculate_total_time
-      render json: { status: 'success', data: @study_record }, status: :ok
-    else
-      render json: { status: 'error', message: 'Please run the `start` command first.' }, status: :unprocessable_entity
-    end
-  end
-
-  def after_login
+  def index
     logger.info "Request Headers: #{request.headers.to_h}"
     @study_records = current_user.study_records
     @last_week_study_records_with_tags = @study_records.data_for_week_containing(Date.today)

@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :api do
+    get 'study_sessions/create'
+    get 'study_sessions/update'
+  end
   root 'dashboard#top_page'
 
   # カスタムルート
-  get 'dashboard/after_login', to: 'dashboard#after_login'
-  get 'dashboard/after_login/:year/:month', to: 'dashboard#after_login', as: 'after_login_data'
-  post 'dashboard/start', to: 'dashboard#start'
-  post 'dashboard/finish', to: 'dashboard#finish'
+  get 'dashboard/index/:year/:month', to: 'dashboard#index'
+  post 'api/study_sessions/create', to: 'dashboard#start'
+  post 'api/study_sessions/update', to: 'dashboard#finish'
   get 'dashboard/week_data', to: 'dashboard#week_data'
   get 'dashboard/how_to_use', to: 'dashboard#how_to_use'
-
-  # RESTfulリソース
 
   resources :dashboard do
     resources :tags, only: %i[create destroy]

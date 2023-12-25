@@ -33,7 +33,7 @@
           const year = now.getFullYear();
     
           // バックエンドから選択した月のデータを取得
-          const response = await axios.get(`/dashboard/after_login/${year}/${month}`, {
+          const response = await axios.get(`/dashboard/index/${year}/${month}`, {
                   headers: {
                       Accept: 'application/json'
                   }

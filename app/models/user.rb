@@ -9,7 +9,7 @@ class User < ApplicationRecord
   #        :recoverable, :rememberable, :validatable
 
   has_many :authorizations, dependent: :destroy
-  has_many :dashboards, dependent: :destroy
+  has_many :study_records, dependent: :destroy
 
   def self.from_omniauth(auth)
     data = auth.info
