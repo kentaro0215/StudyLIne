@@ -9,7 +9,10 @@
 
 <!-- グラフ表示コンテナ -->
 <div class="graph-container text-left mb-4 p-4">
+  <!-- ラベルを追加 -->
+  <label for="toggle-graphs" class="mr-2">グラフ切り替え</label>
   <input type="checkbox" id="toggle-graphs" class="toggle p-2" />
+
   <div id="chart-container" class="block p-4">
     <%= render partial: 'shared/line' %>
   </div>
@@ -17,6 +20,7 @@
     <%= render partial: 'shared/chart' %>
   </div>
 </div>
+
 
 
 

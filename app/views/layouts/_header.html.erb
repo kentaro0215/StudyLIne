@@ -3,6 +3,7 @@
 
   <div class="ml-auto">
     <% if user_signed_in? %>
+      <a href="/static_pages/how_to_use" class="footer-link">使い方</a>
       <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-accent" %>
     <% else %>
       <%= button_to "Sign Up with Google", user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-accent" %>

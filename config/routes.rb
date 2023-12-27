@@ -5,14 +5,13 @@ Rails.application.routes.draw do
     get 'study_sessions/create'
     get 'study_sessions/update'
   end
-  root 'dashboard#top_page'
-
+  root 'static_pages#index'
   # カスタムルート
   get 'dashboard/index/:year/:month', to: 'dashboard#index'
   post 'api/study_sessions/create', to: 'dashboard#start'
   post 'api/study_sessions/update', to: 'dashboard#finish'
   get 'dashboard/week_data', to: 'dashboard#week_data'
-  get 'dashboard/how_to_use', to: 'dashboard#how_to_use'
+  get 'static_pages/how_to_use', to: 'static_pages#how_to_use'  
 
   resources :dashboard do
     resources :tags, only: %i[create destroy]

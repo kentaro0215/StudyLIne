@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, except: %i[top_page start finish how_to_use]
+  before_action :authenticate_user!, except: %i[start finish how_to_use]
   protect_from_forgery except: %i[start finish]
-
-  def top_page
-    return unless user_signed_in?
-    redirect_to dashboard_index_path
-  end
 
   def show
     selected_date = Date.parse(params[:date])
@@ -61,8 +56,6 @@ class DashboardController < ApplicationController
 
     render json: week_data_with_tags
   end
-
-  def how_to_use; end
 
   private
 
