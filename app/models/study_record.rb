@@ -65,21 +65,11 @@ class StudyRecord< ApplicationRecord
     week_data_with_tags
   end
 
-  # def self.past_week_date_with_tags
-  #   # 一週間分のデータを格納する配列を初期化
-  #   week_data_with_tags = []
+    # ユーザーに属するユニークな年を取得
+    def self.unique_years_for_user(user)
+      where(user: user)
+        .group("DATE_PART('year', created_at)")
+        .pluck("DATE_PART('year', created_at)")
+    end
 
-  #   # 今日から過去6日間にわたってデータを集計
-  #   6.downto(0) do |n|
-  #     # その日のダッシュボードを取得
-  #     daily_dashboards = self.where(created_at: n.day.ago.all_day)
-
-  #     # タグごとに集計
-  #     daily_data = daily_dashboards.joins(:tags).group('tags.name').sum(:total_time)
-  #     # 日付とともにハッシュに追加
-  #     week_data_with_tags << { date: n.day.ago.to_date, data: daily_data }
-  #   end
-
-  #   week_data_with_tags
-  # end
 end

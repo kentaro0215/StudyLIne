@@ -38,6 +38,7 @@ class DashboardController < ApplicationController
     logger.info "Request Headers: #{request.headers.to_h}"
     @study_records = current_user.study_records
     @last_week_study_records_with_tags = @study_records.data_for_week_containing(Date.today)
+
     year = params[:year].present? ? params[:year].to_i : Time.now.year
     month = params[:month].present? ? params[:month].to_i : Time.now.month
     @month_data = current_user.study_records.past_month_data(year, month)
@@ -46,6 +47,11 @@ class DashboardController < ApplicationController
       format.html # after_login.html.erbをレンダリング
       format.json { render json: @month_data } # JSONレスポンスを返す
     end
+  end
+
+  def years
+    available_years = StudyRecord.unique_years_for_user(current_user)
+    render json: { years: available_years }
   end
 
   def week_data

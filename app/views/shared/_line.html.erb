@@ -27,6 +27,7 @@
     
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', (event) => {
+        const yearSelector = document.getElementById('year-selector');
         const monthSelector = document.getElementById('month-selector');
         const ctx = document.getElementById('myChart').getContext('2d');
         let myChart;
@@ -34,7 +35,7 @@
      // バックエンドから利用可能な年のリストを取得してドロップダウンに追加する関数
     async function populateYearOptions() {
       // ここでバックエンドから年のデータを取得する
-      const response = await axios.get('/path/to/your/endpoint', {
+    const response = await axios.get(`/dashboard/years`, {
         headers: {
           Accept: 'application/json'
         }
@@ -49,9 +50,8 @@
       });
     }
 
-        async function updateChart(month) {
+        async function updateChart(year, month) {
           const now = new Date();
-          const year = now.getFullYear();
     
           // バックエンドから選択した月のデータを取得
           const response = await axios.get(`/dashboard/index/${year}/${month}`, {
@@ -129,12 +129,16 @@
         });
     
         monthSelector.addEventListener('change', function() {
+          const selectedYear = yearSelector.value;
           const selectedMonth = monthSelector.value;
-          updateChart(selectedMonth);
+          updateChart(selectedYear, selectedMonth);
         });
     
-        // 初期値として現在の月のグラフを表示
-        monthSelector.value = new Date().getMonth() + 1;
-        monthSelector.dispatchEvent(new Event('change'));
+    // 初期値として現在の年月のグラフを表示
+    const now = new Date();
+    yearSelector.value = now.getFullYear();
+    monthSelector.value = now.getMonth() + 1;
+    updateChart(yearSelector.value, monthSelector.value);
+
       });
     </script>

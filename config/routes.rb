@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   root 'static_pages#index'
   # カスタムルート
+  get 'dashboard/years', to: 'dashboard#years'
   get 'dashboard/index/:year/:month', to: 'dashboard#index'
   post 'api/study_sessions/create', to: 'dashboard#start'
   post 'api/study_sessions/update', to: 'dashboard#finish'
