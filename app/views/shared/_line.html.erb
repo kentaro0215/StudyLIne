@@ -41,14 +41,31 @@
         }
       });
       const years = response.data.years; // 仮のプロパティ名
+      const currentYear = new Date().getFullYear();
+      let currentYearIncluded = false;
+
 
       years.forEach(year => {
+        if (year === currentYear) {
+          currentYearIncluded = true;
+        }
         const option = document.createElement('option');
         option.value = year;
         option.textContent = `${year}年`;
         yearSelector.appendChild(option);
-      });
-    }
+    });
+
+      // 現在の年がリストに含まれていなければ追加
+      if (!currentYearIncluded) {
+        const yearOption = document.createElement('option');
+        yearOption.value = currentYear;
+        yearOption.textContent = `${currentYear}年`;
+        yearSelector.appendChild(yearOption);
+      }
+
+    yearSelector.value = currentYear; // 初期値を現在の年に設定
+    console.log("Year Selector Initial Value:", yearSelector.value); // 初期値をログ出力
+}
 
         async function updateChart(year, month) {
           const now = new Date();
@@ -64,7 +81,7 @@
 
           const values = Object.values(response.data);
 
-            const totalStudyMinutes = values.reduce((acc, cur) => acc + cur, 0);
+          const totalStudyMinutes = values.reduce((acc, cur) => acc + cur, 0);
   
   // 時間と分に分割
   const hours = Math.floor(totalStudyMinutes / 60);
@@ -120,11 +137,31 @@
           });
         }
 
-        populateYearOptions();
+    // ページ読み込み時に年のリストを取得してドロップダウンに追加し、初期グラフを表示する非同期関数
+    async function initializePage() {
+        await populateYearOptions();
+
+        // 現在の年と月を取得
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1;
+
+        // 年と月のセレクターに初期値を設定
+        yearSelector.value = currentYear;
+        monthSelector.value = currentMonth;
+
+        // 初期値でグラフを更新
+        await updateChart(currentYear, currentMonth);
+    }
+
+    // 初期化関数を実行
+    initializePage();
 
         yearSelector.addEventListener('change', function() {
           const selectedYear = yearSelector.value;
           const selectedMonth = monthSelector.value;
+          console.log("Year Selector Change - Year:", selectedYear); // 変更時の年をログ出力
+          console.log("Year Selector Change - Month:", selectedMonth); // 変更時の月をログ出力
           updateChart(selectedYear, selectedMonth);
         });
     
@@ -133,12 +170,5 @@
           const selectedMonth = monthSelector.value;
           updateChart(selectedYear, selectedMonth);
         });
-    
-    // 初期値として現在の年月のグラフを表示
-    const now = new Date();
-    yearSelector.value = now.getFullYear();
-    monthSelector.value = now.getMonth() + 1;
-    updateChart(yearSelector.value, monthSelector.value);
-
       });
     </script>

@@ -68,8 +68,8 @@ class StudyRecord< ApplicationRecord
     # ユーザーに属するユニークな年を取得
     def self.unique_years_for_user(user)
       where(user: user)
-        .group("DATE_PART('year', created_at)")
-        .pluck("DATE_PART('year', created_at)")
+        .group(Arel.sql("DATE_PART('year', created_at)"))
+        .pluck(Arel.sql("DATE_PART('year', created_at)"))
     end
 
 end
