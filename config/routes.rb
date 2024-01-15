@@ -2,15 +2,13 @@
 
 Rails.application.routes.draw do
   namespace :api do
-    get 'study_sessions/create'
-    get 'study_sessions/update'
+    post 'study_sessions/create', to: 'study_sessions#create'
+    post 'study_sessions/update', to: 'study_sessions#update'
   end
   root 'static_pages#index'
   # カスタムルート
   get 'dashboard/years', to: 'dashboard#years'
   get 'dashboard/index/:year/:month', to: 'dashboard#index'
-  post 'api/study_sessions/create', to: 'dashboard#start'
-  post 'api/study_sessions/update', to: 'dashboard#finish'
   get 'dashboard/week_data', to: 'dashboard#week_data'
   get 'static_pages/how_to_use', to: 'static_pages#how_to_use'  
 

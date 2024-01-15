@@ -47,12 +47,7 @@
         <section>
             <h2>環境変数にトークンを保存</h2>
             <p>ログイン後、トークンを環境変数に保存します。</p>
-            <p><strong>zshを使用している場合:</strong></p>
-            <pre><code>echo 'export CUSTOM_TOKEN="<%= current_user.custom_token %>"' &gt;&gt; ~/.zshrc</code><button class="btn btn-xs btn-outline copy-button">Copy</button></pre><br>
-            <pre><code>source ~/.zshrc</code><button class="btn btn-xs btn-outline copy-button">Copy</button></pre>
-            <p><strong>bashを使用している場合:</strong></p>
-            <pre><code>echo 'export CUSTOM_TOKEN="<%= current_user.custom_token %>"' &gt;&gt; ~/.bashrc</code><button class="btn btn-xs btn-outline copy-button">Copy</button></pre><br>
-            <pre><code>source ~/.bashrc</code><button class="btn btn-xs btn-outline copy-button">Copy</button></pre>
+            <pre><code>stl configure <%= current_user.custom_token %></code><button class="btn btn-xs btn-outline copy-button">Copy</button></pre><br>
         </section>
 
         <section>

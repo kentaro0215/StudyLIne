@@ -1,5 +1,5 @@
 class Api::StudySessionsController < ApplicationController
-  beofore_action :authenticate_token_user!, only: %i[create update]
+  before_action :authenticate_token_user!, except: %i[create update]
   protect_from_forgery except: %i[start finish]
   def create
         # 現在のユーザーに対して未完成のstudy_recordセッションを確認
