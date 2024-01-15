@@ -1,0 +1,76 @@
+<!-- 日付選択フォーム -->
+<div class="p-2">
+  <form id="date-form" class="inline-block">
+    <label for="date-picker">日付を選択:</label>
+    <input type="date" id="date-picker" name="date" class="input input-bordered p-2">
+    <button type="submit" class="btn btn-primary ml-2">選択</button>
+  </form>
+</div>
+
+<!-- グラフ表示コンテナ -->
+<div class="graph-container text-left mb-4 p-4">
+  <!-- ラベルを追加 -->
+  <label for="toggle-graphs" class="mr-2">グラフ切り替え</label>
+  <input type="checkbox" id="toggle-graphs" class="toggle p-2" />
+
+  <div id="chart-container" class="block p-4">
+    <%= render partial: 'shared/line' %>
+  </div>
+  <div id="line-container" class="hidden p-4">
+    <%= render partial: 'shared/chart' %>
+  </div>
+</div>
+
+
+
+
+
+<script>
+document.getElementById('date-form').addEventListener('submit', function(event) {
+  event.preventDefault();  // デフォルトのフォーム送信を阻止
+  const selectedDate = document.getElementById('date-picker').value;
+
+  if (!selectedDate) {
+    alert('日付を選択してください。');
+    return;
+  }
+
+  const url = `/dashboard/show?date=${selectedDate}`;
+  console.log('Redirecting to URL:', url);  // リダイレクトするURLをログに表示
+  window.location.href = url;  // URLにリダイレクト
+});
+
+</script>
+
+  <!-- グラフ表示トグル -->
+
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleSwitch = document.getElementById('toggle-graphs');
+
+    // `toggleSwitch.checked`の代わりに`false`を引数として渡す
+    initializeGraphDisplay(false);
+
+    toggleSwitch.addEventListener('change', function() {
+      updateGraphDisplay(this.checked);
+    });
+  });
+
+  function updateGraphDisplay(isChecked) {
+    var chartContainer = document.getElementById('chart-container');
+    var lineContainer = document.getElementById('line-container');
+
+    if (isChecked) {
+      chartContainer.style.display = 'none';
+      lineContainer.style.display = 'block';
+    } else {
+      chartContainer.style.display = 'block';
+      lineContainer.style.display = 'none';
+    }
+  }
+
+  function initializeGraphDisplay(isChecked) {
+    updateGraphDisplay(isChecked);
+  }
+</script>
