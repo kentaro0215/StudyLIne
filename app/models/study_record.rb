@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class StudyRecord< ApplicationRecord
+class StudyRecord < ApplicationRecord
   belongs_to :user
-  has_many :study_record_tags , dependent: :destroy
+  has_many :study_record_tags, dependent: :destroy
   has_many :tags, through: :study_record_tags
 
   def calculate_total_time
@@ -21,7 +21,7 @@ class StudyRecord< ApplicationRecord
     this_week_dashboards
   end
 
-  def self.past_month_data(year = Time.now.year, month = Time.now.month)
+  def self.past_month_data(year = Time.zone.now.year, month = Time.zone.now.month)
     # 指定された月の日数を取得
     days_in_month = Date.new(year, month, 1).next_month.prev_day.day
 
@@ -65,11 +65,10 @@ class StudyRecord< ApplicationRecord
     week_data_with_tags
   end
 
-    # ユーザーに属するユニークな年を取得
-    def self.unique_years_for_user(user)
-      where(user: user)
-        .group(Arel.sql("DATE_PART('year', start_time)"))
-        .pluck(Arel.sql("DATE_PART('year', start_time)"))
-    end
-
+  # ユーザーに属するユニークな年を取得
+  def self.unique_years_for_user(user)
+    where(user:)
+      .group(Arel.sql("DATE_PART('year', start_time)"))
+      .pluck(Arel.sql("DATE_PART('year', start_time)"))
+  end
 end

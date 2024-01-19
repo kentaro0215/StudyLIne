@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'dashboard/years', to: 'dashboard#years'
   get 'dashboard/index/:year/:month', to: 'dashboard#index'
   get 'dashboard/week_data', to: 'dashboard#week_data'
-  get 'static_pages/how_to_use', to: 'static_pages#how_to_use'  
+  get 'static_pages/how_to_use', to: 'static_pages#how_to_use'
 
   resources :dashboard do
     resources :tags, only: %i[create destroy]

@@ -37,10 +37,10 @@ class DashboardController < ApplicationController
   def index
     logger.info "Request Headers: #{request.headers.to_h}"
     @study_records = current_user.study_records
-    @last_week_study_records_with_tags = @study_records.data_for_week_containing(Date.today)
+    @last_week_study_records_with_tags = @study_records.data_for_week_containing(Time.zone.today)
 
-    year = params[:year].present? ? params[:year].to_i : Time.now.year
-    month = params[:month].present? ? params[:month].to_i : Time.now.month
+    year = params[:year].present? ? params[:year].to_i : Time.zone.now.year
+    month = params[:month].present? ? params[:month].to_i : Time.zone.now.month
     @month_data = current_user.study_records.past_month_data(year, month)
     @month_data = Hash[(1..@month_data.length).zip @month_data]
     respond_to do |format|
