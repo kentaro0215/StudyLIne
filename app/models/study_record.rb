@@ -15,7 +15,7 @@ class StudyRecord< ApplicationRecord
   def self.past_week_date
     this_week_dashboards = []
     6.downto(0) do |n|
-      daily_dashboards = where(created_at: n.day.ago.all_day).sum(:total_time)
+      daily_dashboards = where(start_time: n.day.ago.all_day).sum(:total_time)
       this_week_dashboards << daily_dashboards
     end
     this_week_dashboards
@@ -33,7 +33,7 @@ class StudyRecord< ApplicationRecord
     end_date = Date.new(year, month, days_in_month)
 
     # 指定された月のデータを取得
-    dashboards = where(created_at: start_date.beginning_of_day..end_date.end_of_day)
+    dashboards = where(start_time: start_date.beginning_of_day..end_date.end_of_day)
 
     # 各日のデータを集計
     dashboards.each do |dashboard|
@@ -57,7 +57,7 @@ class StudyRecord< ApplicationRecord
     week_data_with_tags = []
     7.times do |n|
       day = monday + n.days
-      daily_dashboards = where(created_at: day.all_day)
+      daily_dashboards = where(start_time: day.all_day)
       daily_data = daily_dashboards.joins(:tags).group('tags.name').sum(:total_time)
       week_data_with_tags << { date: day, data: daily_data }
     end
@@ -68,8 +68,8 @@ class StudyRecord< ApplicationRecord
     # ユーザーに属するユニークな年を取得
     def self.unique_years_for_user(user)
       where(user: user)
-        .group(Arel.sql("DATE_PART('year', created_at)"))
-        .pluck(Arel.sql("DATE_PART('year', created_at)"))
+        .group(Arel.sql("DATE_PART('year', start_time)"))
+        .pluck(Arel.sql("DATE_PART('year', start_time)"))
     end
 
 end
