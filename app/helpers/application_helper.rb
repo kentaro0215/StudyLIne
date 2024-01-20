@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def default_meta_tags
     {
@@ -5,7 +7,7 @@ module ApplicationHelper
       title: '学習記録をターミナルから管理しよう！',
       reverse: true,
       charset: 'utf-8',
-      description: 'Pluspoを使えば「スポーツ・日時・場所」の好きな組み合わせで自由にスポーツ施設を検索できます。',
+      description: 'StudyLineはターミナルから学習記録を管理することができるアプリです。',
       keywords: 'プログラミング学習,プログラミング',
       canonical: request.original_url,
       separator: '|',

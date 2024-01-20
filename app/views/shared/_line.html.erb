@@ -3,6 +3,8 @@
 <!-- 合計時間を表示するための要素を追加 -->
 <div id="total-study-time" class="text-lg font-semibold"></div>
 
+<select id="year-selector" class="select select-bordered max-w-xs"></select>
+
 <select id="month-selector" class="select select-bordered max-w-xs">
   <option value="1">1月</option>
   <option value="2">2月</option>
@@ -17,35 +19,69 @@
   <option value="11">11月</option>
   <option value="12">12月</option>
 </select>
+
+
 <canvas id="myChart" width="400" height="150"></canvas>
     <canvas id="myChart"></canvas>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
-    
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', (event) => {
+        const yearSelector = document.getElementById('year-selector');
         const monthSelector = document.getElementById('month-selector');
         const ctx = document.getElementById('myChart').getContext('2d');
         let myChart;
-    
-        async function updateChart(month) {
+
+     // バックエンドから利用可能な年のリストを取得してドロップダウンに追加する関数
+    async function populateYearOptions() {
+      // ここでバックエンドから年のデータを取得する
+    const response = await axios.get(`/dashboard/years`, {
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+      const years = response.data.years; // 仮のプロパティ名
+      const currentYear = new Date().getFullYear();
+      let currentYearIncluded = false;
+
+
+      years.forEach(year => {
+        if (year === currentYear) {
+          currentYearIncluded = true;
+        }
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = `${year}年`;
+        yearSelector.appendChild(option);
+    });
+
+      // 現在の年がリストに含まれていなければ追加
+      if (!currentYearIncluded) {
+        const yearOption = document.createElement('option');
+        yearOption.value = currentYear;
+        yearOption.textContent = `${currentYear}年`;
+        yearSelector.appendChild(yearOption);
+      }
+
+    yearSelector.value = currentYear; // 初期値を現在の年に設定
+    console.log("Year Selector Initial Value:", yearSelector.value); // 初期値をログ出力
+}
+
+        async function updateChart(year, month) {
           const now = new Date();
-          const year = now.getFullYear();
     
           // バックエンドから選択した月のデータを取得
-          const response = await axios.get(`/dashboard/after_login/${year}/${month}`, {
+          const response = await axios.get(`/dashboard/index/${year}/${month}`, {
                   headers: {
                       Accept: 'application/json'
                   }
               });
 
           const data = response.data;
-          console.log(data);
 
           const values = Object.values(response.data);
-          console.log(values);
 
-            const totalStudyMinutes = values.reduce((acc, cur) => acc + cur, 0);
+          const totalStudyMinutes = values.reduce((acc, cur) => acc + cur, 0);
   
   // 時間と分に分割
   const hours = Math.floor(totalStudyMinutes / 60);
@@ -100,14 +136,39 @@
             }
           });
         }
-    
-        monthSelector.addEventListener('change', function() {
+
+    // ページ読み込み時に年のリストを取得してドロップダウンに追加し、初期グラフを表示する非同期関数
+    async function initializePage() {
+        await populateYearOptions();
+
+        // 現在の年と月を取得
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1;
+
+        // 年と月のセレクターに初期値を設定
+        yearSelector.value = currentYear;
+        monthSelector.value = currentMonth;
+
+        // 初期値でグラフを更新
+        await updateChart(currentYear, currentMonth);
+    }
+
+    // 初期化関数を実行
+    initializePage();
+
+        yearSelector.addEventListener('change', function() {
+          const selectedYear = yearSelector.value;
           const selectedMonth = monthSelector.value;
-          updateChart(selectedMonth);
+          console.log("Year Selector Change - Year:", selectedYear); // 変更時の年をログ出力
+          console.log("Year Selector Change - Month:", selectedMonth); // 変更時の月をログ出力
+          updateChart(selectedYear, selectedMonth);
         });
     
-        // 初期値として現在の月のグラフを表示
-        monthSelector.value = new Date().getMonth() + 1;
-        monthSelector.dispatchEvent(new Event('change'));
+        monthSelector.addEventListener('change', function() {
+          const selectedYear = yearSelector.value;
+          const selectedMonth = monthSelector.value;
+          updateChart(selectedYear, selectedMonth);
+        });
       });
-    </script> 
+    </script>
