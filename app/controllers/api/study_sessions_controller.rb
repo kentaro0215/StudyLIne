@@ -35,21 +35,3 @@ module Api
         status: :unprocessable_entity
       end
     end
-
-    private
-
-    def token_user
-      @token_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
-    end
-
-    def authenticate_token_user!
-      token = request.headers['Authorization'].split('Bearer ').last
-      user = User.find_by(custom_token: token)
-      head :unauthorized unless user
-    end
-
-    def study_record_params
-      params.require(:study_record).permit(:start_time, :finish_time, tags: [])
-    end
-  end
-end

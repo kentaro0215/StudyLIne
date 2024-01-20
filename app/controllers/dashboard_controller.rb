@@ -58,8 +58,6 @@ class DashboardController < ApplicationController
     start_date = params[:start_date].to_date
 
     # study_recordモデルのメソッドを使用して、指定された週のデータを取得
-    week_data_with_tags = current_user.study_records.data_for_week_containing(start_date)
-
     render json: week_data_with_tags
   end
 
