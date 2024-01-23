@@ -41,13 +41,6 @@
             <p>Gem <code>study_line</code> はRuby 2.6.0以上でのみ使用可能です。</p>
             <p>Rubyのバージョンを確認するには、以下のコマンドを実行します：</p>
             <pre><code>ruby -v</code> <button class="btn btn-xs btn-outline copy-button">Copy</button></pre>
-            <pre><code>rbenv versions</code><button class="btn btn-xs btn-outline copy-button">Copy</button></pre>
-        </section>
-
-        <section>
-            <h2>環境変数にトークンを保存</h2>
-            <p>以下のコマンドでホームディレクトリ直下にstl_configというファイルを作成しトークンを保存します。</p>
-            <pre><code>stl configure <%= current_user.custom_token %></code><button class="btn btn-xs btn-outline copy-button">Copy</button></pre><br>
         </section>
 
         <section>
@@ -57,8 +50,15 @@
         </section>
 
         <section>
+            <h2>環境変数にトークンを保存</h2>
+            <p>以下のコマンドでホームディレクトリ直下にstl_configというファイルを作成しトークンを保存します。</p>
+            <pre><code>stl configure <%= current_user.custom_token %></code><button class="btn btn-xs btn-outline copy-button">Copy</button></pre><br>
+        </section>
+
+        <section>
             <h2>コマンド</h2>
             <ul>
+                <li><code>stl show</code>: 保存されてりるトークンを表示します</li>
                 <li><code>stl start</code>: 学習開始</li>
                 <li><code>stl finish</code>: 学習終了</li>
             </ul>
