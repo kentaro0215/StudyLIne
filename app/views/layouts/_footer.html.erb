@@ -1,6 +1,7 @@
 <footer class="footer footer-center p-10 bg-primary text-primary-content">
 
     <div class="footer-links">
-    <a href="#" class="footer-link">プライバシーポリシー</a>
-    <a href="#" class="footer-link">利用規約</a>
+    <%= link_to 'プライバシーポリシー', static_pages_privacy_policy_path, class: 'footer-link' %>
+
+    <%= link_to '利用規約', static_pages_terms_of_service_path, class: 'footer-link' %>
   </div>

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     post 'study_sessions/update', to: 'study_sessions#update'
   end
   root 'static_pages#index'
+  get 'static_pages/terms_of_service', to: 'static_pages#terms_of_service'
+  get 'static_pages/privacy_policy', to: 'static_pages#privacy_policy'
   # カスタムルート
   get 'dashboard/years', to: 'dashboard#years'
   get 'dashboard/index/:year/:month', to: 'dashboard#index'
