@@ -3,7 +3,7 @@
 module Api
   class StudySessionsController < ApplicationController
     before_action :authenticate_token_user!, except: %i[create update]
-    protect_from_forgery except: %i[start finish]
+    protect_from_forgery except: %i[create update]
     def create
       # 現在のユーザーに対して未完成のstudy_recordセッションを確認
       ongoing_session = token_user.study_records.find_by(finish_time: nil)
@@ -35,5 +35,12 @@ module Api
         status: :unprocessable_entity
       end
     end
+
+    private
+
+    def token_user
+      @token_user ||= User.find_by(custom_token: request.headers['Authorization'].split('Bearer ').last)
+    end
+
   end
 end
