@@ -82,6 +82,7 @@ checked program was:
 /* end */
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/Users/kentarou/.rbenv/versions/3.2.2/openssl/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/Users/kentarou/.rbenv/versions/3.2.2/openssl/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong    -lcrypto  -lruby.3.2 -lssl -lcrypto  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lcrypto'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -118,6 +119,7 @@ checked program was:
 have_func: checking for DTLS_method() in openssl/ssl.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/Users/kentarou/.rbenv/versions/3.2.2/openssl/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/Users/kentarou/.rbenv/versions/3.2.2/openssl/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong    -lssl -lcrypto  -lruby.3.2 -lssl -lcrypto  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lcrypto', '-lssl'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -143,6 +145,7 @@ checked program was:
 have_func: checking for TLS_server_method() in openssl/ssl.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/Users/kentarou/.rbenv/versions/3.2.2/openssl/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/Users/kentarou/.rbenv/versions/3.2.2/openssl/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong    -lssl -lcrypto  -lruby.3.2 -lssl -lcrypto  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lcrypto', '-lssl'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -168,6 +171,7 @@ checked program was:
 have_func: checking for SSL_CTX_set_min_proto_version(NULL, 0) in openssl/ssl.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/Users/kentarou/.rbenv/versions/3.2.2/openssl/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/Users/kentarou/.rbenv/versions/3.2.2/openssl/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong    -lssl -lcrypto  -lruby.3.2 -lssl -lcrypto  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lcrypto', '-lssl'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -217,6 +221,7 @@ checked program was:
 /* end */
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/Users/kentarou/.rbenv/versions/3.2.2/openssl/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/Users/kentarou/.rbenv/versions/3.2.2/openssl/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong    -lssl -lcrypto  -lruby.3.2 -lssl -lcrypto  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lcrypto', '-lssl'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -241,6 +246,7 @@ checked program was:
 have_func: checking for SSL_CTX_set_ecdh_auto(NULL, 0) in openssl/ssl.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/Users/kentarou/.rbenv/versions/3.2.2/openssl/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/Users/kentarou/.rbenv/versions/3.2.2/openssl/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong    -lssl -lcrypto  -lruby.3.2 -lssl -lcrypto  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lcrypto', '-lssl'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -267,6 +273,7 @@ checked program was:
 have_func: checking for SSL_CTX_set_dh_auto(NULL, 0) in openssl/ssl.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/Users/kentarou/.rbenv/versions/3.2.2/openssl/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/Users/kentarou/.rbenv/versions/3.2.2/openssl/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong    -lssl -lcrypto  -lruby.3.2 -lssl -lcrypto  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lcrypto', '-lssl'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -293,6 +300,7 @@ checked program was:
 have_func: checking for SSL_get1_peer_certificate() in openssl/ssl.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/Users/kentarou/.rbenv/versions/3.2.2/openssl/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/Users/kentarou/.rbenv/versions/3.2.2/openssl/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong    -lssl -lcrypto  -lruby.3.2 -lssl -lcrypto  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lcrypto', '-lssl'
 checked program was:
 /* begin */
  1: #include "ruby.h"

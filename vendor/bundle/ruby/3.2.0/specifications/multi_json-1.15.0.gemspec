@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |s|
   s.name = "multi_json".freeze
-  s.version = "1.15.0"
+  s.version = "1.15.0".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.5".freeze) if s.respond_to? :required_rubygems_version=
   s.metadata = { "bug_tracker_uri" => "https://github.com/intridea/multi_json/issues", "changelog_uri" => "https://github.com/intridea/multi_json/blob/v1.15.0/CHANGELOG.md", "documentation_uri" => "https://www.rubydoc.info/gems/multi_json/1.15.0", "source_code_uri" => "https://github.com/intridea/multi_json/tree/v1.15.0", "wiki_uri" => "https://github.com/intridea/multi_json/wiki" } if s.respond_to? :metadata=
@@ -14,13 +14,13 @@ Gem::Specification.new do |s|
   s.email = ["michael@intridea.com".freeze, "josh.kalderimis@gmail.com".freeze, "sferik@gmail.com".freeze, "pavel@pravosud.com".freeze]
   s.homepage = "https://github.com/intridea/multi_json".freeze
   s.licenses = ["MIT".freeze]
-  s.rubygems_version = "3.4.19".freeze
+  s.rubygems_version = "3.4.22".freeze
   s.summary = "A common interface to multiple JSON libraries.".freeze
 
-  s.installed_by_version = "3.4.19" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.4.22".freeze if s.respond_to? :installed_by_version
 
   s.specification_version = 4
 
-  s.add_development_dependency(%q<rake>.freeze, ["~> 10.5"])
-  s.add_development_dependency(%q<rspec>.freeze, ["~> 3.9"])
+  s.add_development_dependency(%q<rake>.freeze, ["~> 10.5".freeze])
+  s.add_development_dependency(%q<rspec>.freeze, ["~> 3.9".freeze])
 end

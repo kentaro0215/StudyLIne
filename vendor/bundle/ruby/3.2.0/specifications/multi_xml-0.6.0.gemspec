@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |s|
   s.name = "multi_xml".freeze
-  s.version = "0.6.0"
+  s.version = "0.6.0".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.5".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
@@ -13,12 +13,12 @@ Gem::Specification.new do |s|
   s.email = "sferik@gmail.com".freeze
   s.homepage = "https://github.com/sferik/multi_xml".freeze
   s.licenses = ["MIT".freeze]
-  s.rubygems_version = "3.4.19".freeze
+  s.rubygems_version = "3.4.22".freeze
   s.summary = "A generic swappable back-end for XML parsing".freeze
 
-  s.installed_by_version = "3.4.19" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.4.22".freeze if s.respond_to? :installed_by_version
 
   s.specification_version = 4
 
-  s.add_development_dependency(%q<bundler>.freeze, ["~> 1.0"])
+  s.add_development_dependency(%q<bundler>.freeze, ["~> 1.0".freeze])
 end

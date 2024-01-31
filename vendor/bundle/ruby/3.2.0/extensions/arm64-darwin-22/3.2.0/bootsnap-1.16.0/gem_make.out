@@ -3,16 +3,18 @@ current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/
 creating Makefile
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-izwcci sitelibdir\=./.gem.20231007-37918-izwcci clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-b9rt80 sitelibdir\=./.gem.20240131-30063-b9rt80 clean
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-izwcci sitelibdir\=./.gem.20231007-37918-izwcci
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-b9rt80 sitelibdir\=./.gem.20240131-30063-b9rt80
 compiling bootsnap.c
 linking shared-object bootsnap/bootsnap.bundle
+ld: warning: -multiply_defined is obsolete
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-izwcci sitelibdir\=./.gem.20231007-37918-izwcci install
-/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20231007-37918-izwcci/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-b9rt80 sitelibdir\=./.gem.20240131-30063-b9rt80 install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20240131-30063-b9rt80/bootsnap
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-izwcci sitelibdir\=./.gem.20231007-37918-izwcci clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-b9rt80 sitelibdir\=./.gem.20240131-30063-b9rt80 clean

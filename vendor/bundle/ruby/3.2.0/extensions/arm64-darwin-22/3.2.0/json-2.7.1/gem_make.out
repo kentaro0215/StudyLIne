@@ -3,14 +3,14 @@ current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/
 creating Makefile
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
-make DESTDIR\= sitearchdir\=./.gem.20231212-24019-uu5qw2 sitelibdir\=./.gem.20231212-24019-uu5qw2 clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-jpuhrz sitelibdir\=./.gem.20240131-30063-jpuhrz clean
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
-make DESTDIR\= sitearchdir\=./.gem.20231212-24019-uu5qw2 sitelibdir\=./.gem.20231212-24019-uu5qw2
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-jpuhrz sitelibdir\=./.gem.20240131-30063-jpuhrz
 make: Nothing to be done for `all'.
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
-make DESTDIR\= sitearchdir\=./.gem.20231212-24019-uu5qw2 sitelibdir\=./.gem.20231212-24019-uu5qw2 install
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-jpuhrz sitelibdir\=./.gem.20240131-30063-jpuhrz install
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
-make DESTDIR\= sitearchdir\=./.gem.20231212-24019-uu5qw2 sitelibdir\=./.gem.20231212-24019-uu5qw2 clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-jpuhrz sitelibdir\=./.gem.20240131-30063-jpuhrz clean

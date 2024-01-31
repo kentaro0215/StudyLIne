@@ -4,7 +4,7 @@
 
 Gem::Specification.new do |s|
   s.name = "debug".freeze
-  s.version = "1.8.0"
+  s.version = "1.8.0".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.metadata = { "homepage_uri" => "https://github.com/ruby/debug", "source_code_uri" => "https://github.com/ruby/debug" } if s.respond_to? :metadata=
@@ -20,13 +20,13 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/ruby/debug".freeze
   s.licenses = ["Ruby".freeze, "BSD-2-Clause".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 2.6.0".freeze)
-  s.rubygems_version = "3.4.19".freeze
+  s.rubygems_version = "3.4.22".freeze
   s.summary = "Debugging functionality for Ruby".freeze
 
-  s.installed_by_version = "3.4.19" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.4.22".freeze if s.respond_to? :installed_by_version
 
   s.specification_version = 4
 
-  s.add_runtime_dependency(%q<irb>.freeze, [">= 1.5.0"])
-  s.add_runtime_dependency(%q<reline>.freeze, [">= 0.3.1"])
+  s.add_runtime_dependency(%q<irb>.freeze, [">= 1.5.0".freeze])
+  s.add_runtime_dependency(%q<reline>.freeze, [">= 0.3.1".freeze])
 end
