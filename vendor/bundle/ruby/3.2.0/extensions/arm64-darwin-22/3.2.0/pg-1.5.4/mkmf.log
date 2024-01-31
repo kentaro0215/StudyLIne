@@ -100,6 +100,7 @@ checked program was:
 have_func: checking for PQconninfo() in libpq-fe.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -125,6 +126,7 @@ checked program was:
 have_func: checking for PQsslAttribute() in libpq-fe.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -150,6 +152,7 @@ checked program was:
 have_func: checking for PQresultVerboseErrorMessage() in libpq-fe.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -175,6 +178,7 @@ checked program was:
 have_func: checking for PQencryptPasswordConn() in libpq-fe.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -200,6 +204,7 @@ checked program was:
 have_func: checking for PQresultMemorySize() in libpq-fe.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -225,6 +230,7 @@ checked program was:
 have_func: checking for PQenterPipelineMode() in libpq-fe.h... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -251,6 +257,7 @@ checked program was:
 have_func: checking for timegm()... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -274,6 +281,7 @@ checked program was:
 have_func: checking for rb_gc_adjust_memory_usage()... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -297,6 +305,7 @@ checked program was:
 have_func: checking for rb_gc_mark_movable()... -------------------- yes
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -343,6 +352,7 @@ checked program was:
 /* end */
 
 DYLD_FALLBACK_LIBRARY_PATH=.:/Users/kentarou/.rbenv/versions/3.2.2/lib "clang -o conftest -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/arm64-darwin22 -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0/ruby/backward -I/Users/kentarou/.rbenv/versions/3.2.2/include/ruby-3.2.0 -I. -I/opt/homebrew/opt/postgresql@15/include -I/Users/kentarou/.rbenv/versions/3.2.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -fdeclspec -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wextra-tokens -Wdeprecated-declarations -Wdivision-by-zero -Wdiv-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wundef  -fno-common -pipe conftest.c  -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib -L/opt/homebrew/opt/postgresql@15/lib -L. -L/Users/kentarou/.rbenv/versions/3.2.2/lib  -fstack-protector-strong -Wl,-rpath,/opt/homebrew/opt/postgresql@15/lib    -lpq  -lruby.3.2 -lpq  -lpthread  "
+ld: warning: ignoring duplicate libraries: '-lpq'
 checked program was:
 /* begin */
  1: #include "ruby.h"

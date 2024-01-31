@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |s|
   s.name = "rake".freeze
-  s.version = "13.0.6"
+  s.version = "13.0.6".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.metadata = { "bug_tracker_uri" => "https://github.com/ruby/rake/issues", "changelog_uri" => "https://github.com/ruby/rake/blob/v13.0.6/History.rdoc", "documentation_uri" => "https://ruby.github.io/rake", "source_code_uri" => "https://github.com/ruby/rake/tree/v13.0.6" } if s.respond_to? :metadata=
@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT".freeze]
   s.rdoc_options = ["--main".freeze, "README.rdoc".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 2.2".freeze)
-  s.rubygems_version = "3.4.19".freeze
+  s.rubygems_version = "3.4.22".freeze
   s.summary = "Rake is a Make-like program implemented in Ruby".freeze
 
-  s.installed_by_version = "3.4.19" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.4.22".freeze if s.respond_to? :installed_by_version
 end

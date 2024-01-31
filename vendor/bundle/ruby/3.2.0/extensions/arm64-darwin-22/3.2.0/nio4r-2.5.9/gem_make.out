@@ -13,10 +13,10 @@ checking for sys/resource.h... yes
 creating Makefile
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-51ejnc sitelibdir\=./.gem.20231007-37918-51ejnc clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-rgxlmi sitelibdir\=./.gem.20240131-30063-rgxlmi clean
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-51ejnc sitelibdir\=./.gem.20231007-37918-51ejnc
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-rgxlmi sitelibdir\=./.gem.20240131-30063-rgxlmi
 compiling bytebuffer.c
 bytebuffer.c:308:20: warning: implicit conversion loses integer precision: 'ssize_t' (aka 'long') to 'int' [-Wshorten-64-to-32]
     return INT2NUM(bytes_read);
@@ -371,10 +371,12 @@ In file included from nio4r_ext.c:6:
 89 warnings generated.
 compiling selector.c
 linking shared-object nio4r_ext.bundle
+ld: warning: -multiply_defined is obsolete
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-51ejnc sitelibdir\=./.gem.20231007-37918-51ejnc install
-/usr/bin/install -c -m 0755 nio4r_ext.bundle ./.gem.20231007-37918-51ejnc
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-rgxlmi sitelibdir\=./.gem.20240131-30063-rgxlmi install
+/usr/bin/install -c -m 0755 nio4r_ext.bundle ./.gem.20240131-30063-rgxlmi
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-51ejnc sitelibdir\=./.gem.20231007-37918-51ejnc clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-rgxlmi sitelibdir\=./.gem.20240131-30063-rgxlmi clean

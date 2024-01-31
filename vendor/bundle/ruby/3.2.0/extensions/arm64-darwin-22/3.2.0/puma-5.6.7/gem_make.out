@@ -14,18 +14,20 @@ checking for Random.bytes... yes
 creating Makefile
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/puma-5.6.7/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-oup67e sitelibdir\=./.gem.20231007-37918-oup67e clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-24egrk sitelibdir\=./.gem.20240131-30063-24egrk clean
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/puma-5.6.7/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-oup67e sitelibdir\=./.gem.20231007-37918-oup67e
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-24egrk sitelibdir\=./.gem.20240131-30063-24egrk
 compiling http11_parser.c
 compiling mini_ssl.c
 compiling puma_http11.c
 linking shared-object puma/puma_http11.bundle
+ld: warning: -multiply_defined is obsolete
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/puma-5.6.7/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-oup67e sitelibdir\=./.gem.20231007-37918-oup67e install
-/usr/bin/install -c -m 0755 puma_http11.bundle ./.gem.20231007-37918-oup67e/puma
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-24egrk sitelibdir\=./.gem.20240131-30063-24egrk install
+/usr/bin/install -c -m 0755 puma_http11.bundle ./.gem.20240131-30063-24egrk/puma
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/puma-5.6.7/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20231007-37918-oup67e sitelibdir\=./.gem.20231007-37918-oup67e clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-24egrk sitelibdir\=./.gem.20240131-30063-24egrk clean

@@ -13,10 +13,10 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/rweng/pry-rails".freeze
   s.licenses = ["MIT".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.1".freeze)
-  s.rubygems_version = "3.4.21".freeze
+  s.rubygems_version = "3.4.22".freeze
   s.summary = "Use Pry as your rails console".freeze
 
-  s.installed_by_version = "3.4.21".freeze if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.4.22".freeze if s.respond_to? :installed_by_version
 
   s.specification_version = 4
 

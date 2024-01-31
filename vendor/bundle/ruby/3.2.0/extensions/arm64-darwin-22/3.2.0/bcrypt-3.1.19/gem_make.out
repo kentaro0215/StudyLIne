@@ -3,10 +3,10 @@ current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/
 creating Makefile
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bcrypt-3.1.19/ext/mri
-make DESTDIR\= sitearchdir\=./.gem.20231018-4224-hm3n95 sitelibdir\=./.gem.20231018-4224-hm3n95 clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-2i583o sitelibdir\=./.gem.20240131-30063-2i583o clean
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bcrypt-3.1.19/ext/mri
-make DESTDIR\= sitearchdir\=./.gem.20231018-4224-hm3n95 sitelibdir\=./.gem.20231018-4224-hm3n95
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-2i583o sitelibdir\=./.gem.20240131-30063-2i583o
 compiling bcrypt_ext.c
 bcrypt_ext.c:41:38: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
     args.size   = NIL_P(input) ? 0 : RSTRING_LEN(input);
@@ -24,10 +24,12 @@ char *crypt_r(const char *key, const char *setting, struct crypt_data *data)
                                                            ^
 1 warning generated.
 linking shared-object bcrypt_ext.bundle
+ld: warning: -multiply_defined is obsolete
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bcrypt-3.1.19/ext/mri
-make DESTDIR\= sitearchdir\=./.gem.20231018-4224-hm3n95 sitelibdir\=./.gem.20231018-4224-hm3n95 install
-/usr/bin/install -c -m 0755 bcrypt_ext.bundle ./.gem.20231018-4224-hm3n95
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-2i583o sitelibdir\=./.gem.20240131-30063-2i583o install
+/usr/bin/install -c -m 0755 bcrypt_ext.bundle ./.gem.20240131-30063-2i583o
 
 current directory: /Users/kentarou/workspace/StudyLine/vendor/bundle/ruby/3.2.0/gems/bcrypt-3.1.19/ext/mri
-make DESTDIR\= sitearchdir\=./.gem.20231018-4224-hm3n95 sitelibdir\=./.gem.20231018-4224-hm3n95 clean
+make DESTDIR\= sitearchdir\=./.gem.20240131-30063-2i583o sitelibdir\=./.gem.20240131-30063-2i583o clean

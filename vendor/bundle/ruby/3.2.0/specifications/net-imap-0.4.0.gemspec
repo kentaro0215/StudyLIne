@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |s|
   s.name = "net-imap".freeze
-  s.version = "0.4.0"
+  s.version = "0.4.0".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.metadata = { "homepage_uri" => "https://github.com/ruby/net-imap", "source_code_uri" => "https://github.com/ruby/net-imap" } if s.respond_to? :metadata=
@@ -16,15 +16,15 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/ruby/net-imap".freeze
   s.licenses = ["Ruby".freeze, "BSD-2-Clause".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 2.7.3".freeze)
-  s.rubygems_version = "3.4.19".freeze
+  s.rubygems_version = "3.4.22".freeze
   s.summary = "Ruby client api for Internet Message Access Protocol".freeze
 
-  s.installed_by_version = "3.4.19" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.4.22".freeze if s.respond_to? :installed_by_version
 
   s.specification_version = 4
 
-  s.add_runtime_dependency(%q<net-protocol>.freeze, [">= 0"])
-  s.add_runtime_dependency(%q<date>.freeze, [">= 0"])
-  s.add_development_dependency(%q<digest>.freeze, [">= 0"])
-  s.add_development_dependency(%q<strscan>.freeze, [">= 0"])
+  s.add_runtime_dependency(%q<net-protocol>.freeze, [">= 0".freeze])
+  s.add_runtime_dependency(%q<date>.freeze, [">= 0".freeze])
+  s.add_development_dependency(%q<digest>.freeze, [">= 0".freeze])
+  s.add_development_dependency(%q<strscan>.freeze, [">= 0".freeze])
 end
