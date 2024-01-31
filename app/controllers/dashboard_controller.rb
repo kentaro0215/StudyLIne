@@ -54,10 +54,19 @@ class DashboardController < ApplicationController
     render json: { years: available_years }
   end
 
-  def week_data
-    params[:start_date].to_date
+  # def week_data
+  #   params[:start_date].to_date
 
-    # study_recordモデルのメソッドを使用して、指定された週のデータを取得
+  #   # study_recordモデルのメソッドを使用して、指定された週のデータを取得
+  #   render json: week_data_with_tags
+  # end
+
+  def week_data
+    start_date = params[:start_date].to_date
+
+    # Dashboardモデルのメソッドを使用して、指定された週のデータを取得
+    week_data_with_tags = current_user.study_records.data_for_week_containing(start_date)
+
     render json: week_data_with_tags
   end
 
