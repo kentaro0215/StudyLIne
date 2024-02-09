@@ -13,7 +13,7 @@
 
 - タグを作成して学習時時間の計測を行う。
 
-[![Image from Gyazo](https://i.gyazo.com/ecf0c71bea99792c080aa7a719bc9977.png)](https://gyazo.com/ecf0c71bea99792c080aa7a719bc9977)
+[![Image from Gyazo](https://i.gyazo.com/ef84b21529e69fe5d1e9a53dd99dd15c.png)](https://gyazo.com/ef84b21529e69fe5d1e9a53dd99dd15c)
 
 ### 学習記録の編集・削除機能
 - 学習記録の後からの編集や削除が可能です。
