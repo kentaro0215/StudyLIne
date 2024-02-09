@@ -9,7 +9,7 @@
 ### CLI学習記録機能
 - `start`, `finish` コマンドを使用して、学習時間の記録と計測を行う。
 
-[![Image from Gyazo](https://i.gyazo.com/9ae3a0ad20a61f1e0a7ded9e04fecf7c.png)](https://gyazo.com/9ae3a0ad20a61f1e0a7ded9e04fecf7c)
+[![Image from Gyazo](https://i.gyazo.com/a47720d48b66ee975566f3a0f3c82bfa.png)](https://gyazo.com/a47720d48b66ee975566f3a0f3c82bfa)
 
 - タグを作成して学習時時間の計測を行う。
 
