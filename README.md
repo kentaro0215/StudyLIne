@@ -9,11 +9,11 @@
 ### CLI学習記録機能
 - `start`, `finish` コマンドを使用して、学習時間の記録と計測を行う。
 
-[![Image from Gyazo](https://i.gyazo.com/a47720d48b66ee975566f3a0f3c82bfa.png)](https://gyazo.com/a47720d48b66ee975566f3a0f3c82bfa)
+[![Image from Gyazo](https://i.gyazo.com/a9a12e0fad5f37858992795b158648a7.png)](https://gyazo.com/a9a12e0fad5f37858992795b158648a7)
 
 - タグを作成して学習時時間の計測を行う。
 
-[![Image from Gyazo](https://i.gyazo.com/ef84b21529e69fe5d1e9a53dd99dd15c.png)](https://gyazo.com/ef84b21529e69fe5d1e9a53dd99dd15c)
+[![Image from Gyazo](https://i.gyazo.com/c53dca943a4c1d475a5252762d35374c.png)](https://gyazo.com/c53dca943a4c1d475a5252762d35374c)
 
 ### 学習記録の編集・削除機能
 - 学習記録の後からの編集や削除が可能です。
