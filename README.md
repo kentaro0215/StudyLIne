@@ -21,8 +21,13 @@
 ### 勉強時間のグラフ表示
 - 学習時間をchart.jsを使用してグラフで可視化します。
 
+[![Image from Gyazo](https://i.gyazo.com/51ec9cbcac409ef9a8f9deb006e1b89c.png)](https://gyazo.com/51ec9cbcac409ef9a8f9deb006e1b89c)
+
+
 ### 検索機能
 - タグによる検索機能と合計勉強時間の表示機能があります。
+
+[![Image from Gyazo](https://i.gyazo.com/f585f73e8eff7378b2056fb7ae51f9d2.png)](https://gyazo.com/f585f73e8eff7378b2056fb7ae51f9d2)
 
 ## 使用技術
 
