@@ -18,6 +18,8 @@
 ### 学習記録の編集・削除機能
 - 学習記録の後からの編集や削除が可能です。
 
+[![Image from Gyazo](https://i.gyazo.com/7eb6da2d28aff5eea147a351f0a0e43c.png)](https://gyazo.com/7eb6da2d28aff5eea147a351f0a0e43c)
+
 ### 勉強時間のグラフ表示
 - 学習時間をchart.jsを使用してグラフで可視化します。
 
